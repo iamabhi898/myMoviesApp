@@ -17,6 +17,9 @@ import {
   View,
   Button,
 } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+
+import TabsNavigator from './navigation/TabsNavigator';
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = React.useState(false);
@@ -27,19 +30,17 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView
-      style={{...styles.screen, backgroundColor: bkgStyle.bkgColor}}>
+    <NavigationContainer>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={bkgStyle.bkgColor}
       />
-      <Text style={{color: bkgStyle.txtColor}}>Home Screen</Text>
-      <Button
-        title={isDarkMode ? 'Light Theme' : 'Dark Theme'}
-        onPress={() => setIsDarkMode(!isDarkMode)}
-        color={'gray'}
+      <TabsNavigator
+        bkgStyle={bkgStyle}
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
       />
-    </SafeAreaView>
+    </NavigationContainer>
   );
 };
 
