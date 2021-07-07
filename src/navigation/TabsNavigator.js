@@ -10,12 +10,12 @@ import FavouritesScreen from '../screens/FavouritesScreen';
 const Tab = createBottomTabNavigator();
 
 const TabsNavigator = props => {
-  const {bkgStyle, isDarkMode, setIsDarkMode} = props;
+  const {bkgStyle, isDarkMode, setIsDarkMode, moviesTitle} = props;
   return (
     <Tab.Navigator
       tabBarOptions={{
         showLabel: true,
-        activeTintColor: 'purple',
+        activeTintColor: '#6930C3',
         activeBackgroundColor: 'pink',
         labelStyle: {
           fontSize: 14,
@@ -24,6 +24,7 @@ const TabsNavigator = props => {
         },
         style: {
           ...styles.tabsNavigator,
+          backgroundColor: bkgStyle.secBkgColor,
         },
       }}>
       <Tab.Screen
@@ -33,6 +34,7 @@ const TabsNavigator = props => {
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
             setIsDarkMode={setIsDarkMode}
+            moviesTitle={moviesTitle}
           />
         )}
       />
@@ -58,11 +60,10 @@ const styles = StyleSheet.create({
     bottom: 30,
     left: 20,
     right: 20,
-    backgroundColor: '#fff',
     borderRadius: 15,
+    borderTopWidth: 0,
     height: 80,
     //shadow
-    shadowColor: '#7f5df0',
     shadowOffset: {
       width: 0,
       height: 10,
