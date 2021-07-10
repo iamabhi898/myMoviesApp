@@ -1,11 +1,9 @@
 import React from 'react';
-// import type {Node} from 'react';
-import {StatusBar, StyleSheet} from 'react-native';
+import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import config from '../config';
 
 import TabsNavigator from './navigation/TabsNavigator';
-// import API_KEY from '../.env';
 
 const App = () => {
   // Theme - Coloring
@@ -16,26 +14,62 @@ const App = () => {
     txtColor: isDarkMode ? '#EBEBEB' : '#050505',
   };
 
-  const [moviesTitle, setMoviesTitle] = React.useState([]);
+  const [moviesState, setMoviesState] = React.useState({
+    trending: [],
+    upcoming: [],
+    popular: [],
+    topRated: [],
+  });
 
-  // Movies API
-  const fetchMoviesTitles = () => {
-    fetch(
-      `https://api.themoviedb.org/3/trending/all/day?api_key=${config.API_KEY}`,
-    )
+  // TMDb API
+  const fetchMovies = async (setMoviesState, category) => {
+    let url;
+    switch (category) {
+      case 'trending':
+        url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${config.API_KEY}`;
+        break;
+      case 'upcoming':
+        url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${config.API_KEY}&language=en-US&page=1`;
+        break;
+      case 'popular':
+        url = `https://api.themoviedb.org/3/movie/popular?api_key=${config.API_KEY}&language=en-US&page=1`;
+        break;
+      case 'topRated':
+        url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${config.API_KEY}&language=en-US&page=1`;
+        break;
+      default:
+        url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${config.API_KEY}`;
+    }
+
+    await fetch(url)
       .then(response => response.json())
       .then(data => {
-        data.results.map(item =>
-          setMoviesTitle(state => [
-            ...state,
-            item.original_title || item.original_name,
-          ]),
-        );
+        setMoviesState(state => {
+          let movies = data.results;
+          switch (category) {
+            case 'trending':
+              return {...state, trending: movies};
+            case 'upcoming':
+              return {...state, upcoming: movies};
+            case 'popular':
+              return {...state, popular: movies};
+            case 'topRated':
+              return {...state, topRated: movies};
+            default:
+              return {...state};
+          }
+        });
+      })
+      .catch(error => {
+        console.log(error);
       });
   };
 
   React.useEffect(() => {
-    fetchMoviesTitles();
+    fetchMovies(setMoviesState, 'trending');
+    fetchMovies(setMoviesState, 'upcoming');
+    fetchMovies(setMoviesState, 'popular');
+    fetchMovies(setMoviesState, 'topRated');
   }, []);
 
   return (
@@ -48,24 +82,26 @@ const App = () => {
         bkgStyle={bkgStyle}
         isDarkMode={isDarkMode}
         setIsDarkMode={setIsDarkMode}
-        moviesTitle={moviesTitle}
+        moviesState={moviesState}
       />
     </NavigationContainer>
   );
 };
 
-// Color Palette
-// purple : #6F4A8E
-// gray : #221F3B
-// black : #050505
-// white : #EBEBEB
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
-
 export default App;
+/*
+
+Color Palette => 
+purple : #6F4A8E
+gray : #221F3B
+black : #050505
+white : #EBEBEB
+
+TMDb API calls =>
+trending : `https://api.themoviedb.org/3/trending/movie/day?api_key=${config.API_KEY}`
+upcoming : `https://api.themoviedb.org/3/movie/upcoming?api_key=${config.API_KEY}&language=en-US&page=1`
+popular : `https://api.themoviedb.org/3/movie/popular?api_key=${config.API_KEY}&language=en-US&page=1`
+topRated : `https://api.themoviedb.org/3/movie/top_rated?api_key=${config.API_KEY}&language=en-US&page=1` 
+
+
+*/
