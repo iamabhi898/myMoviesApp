@@ -10,7 +10,7 @@ import FavouritesScreen from '../screens/FavouritesScreen';
 const Tab = createBottomTabNavigator();
 
 const TabsNavigator = props => {
-  const {bkgStyle, isDarkMode, setIsDarkMode, moviesTitle} = props;
+  const {bkgStyle, isDarkMode, setIsDarkMode, moviesState} = props;
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -19,7 +19,7 @@ const TabsNavigator = props => {
         activeBackgroundColor: 'pink',
         labelStyle: {
           fontSize: 14,
-          marginBottom: 28,
+          marginBottom: 20,
           fontWeight: 'bold',
         },
         style: {
@@ -34,7 +34,7 @@ const TabsNavigator = props => {
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
             setIsDarkMode={setIsDarkMode}
-            moviesTitle={moviesTitle}
+            moviesState={moviesState}
           />
         )}
       />
@@ -57,12 +57,12 @@ const TabsNavigator = props => {
 const styles = StyleSheet.create({
   tabsNavigator: {
     position: 'absolute',
-    bottom: 30,
+    bottom: 20,
     left: 20,
     right: 20,
-    borderRadius: 15,
+    borderRadius: 20,
     borderTopWidth: 0,
-    height: 80,
+    height: 60,
     //shadow
     shadowOffset: {
       width: 0,
