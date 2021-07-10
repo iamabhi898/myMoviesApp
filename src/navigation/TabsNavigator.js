@@ -16,7 +16,7 @@ const TabsNavigator = props => {
       tabBarOptions={{
         showLabel: true,
         activeTintColor: '#6930C3',
-        activeBackgroundColor: 'pink',
+        // activeBackgroundColor: 'pink',
         labelStyle: {
           fontSize: 14,
           marginBottom: 20,
