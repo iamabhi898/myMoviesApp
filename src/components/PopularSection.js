@@ -1,5 +1,7 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, ScrollView} from 'react-native';
+
+import MovieCard from './MovieCard';
 
 const PopularSection = props => {
   const {bkgStyle, movies} = props;
@@ -9,30 +11,37 @@ const PopularSection = props => {
         <Text style={{...styles.title, color: bkgStyle.txtColor}}>Popular</Text>
         <Text style={styles.viewMore}>View More</Text>
       </View>
-      {movies
-        ? movies.map(item => (
-            <Text
-              style={{color: bkgStyle.txtColor, fontWeight: 'bold'}}
-              key={item.title}>
-              {item.title}
-            </Text>
-          ))
-        : null}
+      <ScrollView
+        horizontal={true}
+        style={styles.horizontalScroll}
+        showsHorizontalScrollIndicator={false}>
+        {movies.map(item => (
+          <MovieCard
+            key={item.id}
+            movieId={item.id}
+            title={item.title}
+            rating={item.vote_average}
+            backdrop={item.backdrop_path}
+            poster={item.poster_path}
+            bkgStyle={bkgStyle}
+          />
+        ))}
+        <View style={styles.paddingRightEnd}></View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   wrapper: {
-    // marginBottom: 20,
-    paddingLeft: 20,
+    marginTop: 10,
   },
   titleWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 10,
-    paddingRight: 20,
+    paddingHorizontal: 20,
   },
   title: {
     fontWeight: 'bold',
@@ -42,6 +51,13 @@ const styles = StyleSheet.create({
     color: '#777',
     fontWeight: 'bold',
     fontSize: 14,
+  },
+  horizontalScroll: {
+    paddingLeft: 10,
+    height: 280,
+  },
+  paddingRightEnd: {
+    width: 50,
   },
 });
 

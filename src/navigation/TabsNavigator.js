@@ -19,7 +19,7 @@ const TabsNavigator = props => {
         activeTintColor: isDarkMode ? 'white' : '#6930C3',
         labelStyle: {
           fontSize: 14,
-          marginBottom: 20,
+          marginBottom: 18,
           fontWeight: 'bold',
         },
         style: {
@@ -57,12 +57,12 @@ const TabsNavigator = props => {
 const styles = StyleSheet.create({
   tabsNavigator: {
     position: 'absolute',
-    bottom: 20,
-    left: 20,
-    right: 20,
-    borderRadius: 20,
+    bottom: 15,
+    left: 15,
+    right: 15,
+    borderRadius: 30,
     borderTopWidth: 0,
-    height: 60,
+    height: 55,
     //shadow
     shadowOffset: {
       width: 0,

@@ -20,7 +20,8 @@ const MovieCard = props => {
 
   return (
     <TouchableOpacity activeOpacity={0.9}>
-      <View style={{...styles.cardWrapper}}>
+      <View
+        style={{...styles.cardWrapper, backgroundColor: bkgStyle.secBkgColor}}>
         <View style={styles.image}>
           <Image
             source={{uri: movieImgs.poster}}
@@ -51,11 +52,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 10,
     overflow: 'hidden',
+    marginRight: 10,
+    marginBottom: 20,
+    marginLeft: 10,
     //shadow
     shadowOffset: {
-      width: 0,
+      width: 10,
       height: 10,
     },
+    shadowColor: 'black',
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
     elevation: 6,
