@@ -2,20 +2,11 @@ import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 
 const MovieCard = props => {
-  const {movieId, title, rating, backdrop, poster, bkgStyle} = props;
-  const [movieImgs, setMovieImgs] = React.useState({
-    backdrop: null,
-    poster: null,
-  });
+  const {movieId, title, rating, poster, bkgStyle} = props;
+  const [moviePoster, setMoviePoster] = React.useState(null);
 
   React.useEffect(() => {
-    setMovieImgs(state => {
-      return {
-        ...state,
-        backdrop: `http://image.tmdb.org/t/p/w300/${backdrop}`,
-        poster: `http://image.tmdb.org/t/p/w300/${poster}`,
-      };
-    });
+    setMoviePoster(`http://image.tmdb.org/t/p/w300/${poster}`);
   }, []);
 
   return (
@@ -24,7 +15,7 @@ const MovieCard = props => {
         style={{...styles.cardWrapper, backgroundColor: bkgStyle.secBkgColor}}>
         <View style={styles.image}>
           <Image
-            source={{uri: movieImgs.poster}}
+            source={{uri: moviePoster}}
             style={{
               position: 'absolute',
               width: '100%',

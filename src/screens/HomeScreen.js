@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, ScrollView, Text, Button, StyleSheet} from 'react-native';
 
+import MovieCarousel from '../components/MovieCarousel';
 import TrendingSection from '../components/TrendingSection';
 import UpcomingSection from '../components/UpcomingSection';
 import PopularSection from '../components/PopularSection';
@@ -13,6 +14,11 @@ const HomeScreen = props => {
       <View style={styles.header}>
         <Text style={styles.title}>My Movies</Text>
       </View>
+      <MovieCarousel
+        bkgStyle={bkgStyle}
+        isDarkMode={isDarkMode}
+        movies={moviesState.trending}
+      />
       <TrendingSection bkgStyle={bkgStyle} movies={moviesState.trending} />
       <UpcomingSection bkgStyle={bkgStyle} movies={moviesState.upcoming} />
       <PopularSection bkgStyle={bkgStyle} movies={moviesState.popular} />
