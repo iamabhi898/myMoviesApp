@@ -15,8 +15,8 @@ const TabsNavigator = props => {
     <Tab.Navigator
       tabBarOptions={{
         showLabel: true,
-        activeTintColor: '#6930C3',
-        // activeBackgroundColor: 'pink',
+        inactiveTintColor: isDarkMode ? '#666' : '#777',
+        activeTintColor: isDarkMode ? 'white' : '#6930C3',
         labelStyle: {
           fontSize: 14,
           marginBottom: 20,
