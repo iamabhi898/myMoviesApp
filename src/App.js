@@ -12,6 +12,9 @@ const App = () => {
     bkgColor: isDarkMode ? '#050505' : '#EBEBEB',
     secBkgColor: isDarkMode ? '#221F3B' : 'white',
     txtColor: isDarkMode ? '#EBEBEB' : '#050505',
+    cardBlurBkg: isDarkMode
+      ? 'rgba(52, 52, 52, 0.7)'
+      : 'rgba(152, 152, 152, 0.8)',
   };
 
   const [moviesState, setMoviesState] = React.useState({
@@ -97,11 +100,14 @@ gray : #221F3B
 black : #050505
 white : #EBEBEB
 
+
 TMDb API calls =>
+
 trending : `https://api.themoviedb.org/3/trending/movie/day?api_key=${config.API_KEY}`
 upcoming : `https://api.themoviedb.org/3/movie/upcoming?api_key=${config.API_KEY}&language=en-US&page=1`
 popular : `https://api.themoviedb.org/3/movie/popular?api_key=${config.API_KEY}&language=en-US&page=1`
 topRated : `https://api.themoviedb.org/3/movie/top_rated?api_key=${config.API_KEY}&language=en-US&page=1` 
 
+images : `http://image.tmdb.org/t/p/w500/{your_poster_path}`
 
 */

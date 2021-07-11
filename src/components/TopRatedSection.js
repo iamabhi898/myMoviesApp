@@ -25,13 +25,14 @@ const TopRatedSection = props => {
 const styles = StyleSheet.create({
   wrapper: {
     // marginBottom: 20,
-    padding: 20,
+    paddingLeft: 20,
   },
   titleWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 10,
+    paddingRight: 20,
   },
   title: {
     fontWeight: 'bold',
