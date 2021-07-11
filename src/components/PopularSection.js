@@ -21,7 +21,6 @@ const PopularSection = props => {
             movieId={item.id}
             title={item.title}
             rating={item.vote_average}
-            backdrop={item.backdrop_path}
             poster={item.poster_path}
             bkgStyle={bkgStyle}
           />
