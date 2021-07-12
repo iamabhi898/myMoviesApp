@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
@@ -14,14 +15,10 @@ const TabsNavigator = props => {
   return (
     <Tab.Navigator
       tabBarOptions={{
-        showLabel: true,
-        inactiveTintColor: isDarkMode ? '#666' : '#777',
+        showLabel: false,
+        inactiveTintColor: isDarkMode ? '#555' : '#999',
         activeTintColor: isDarkMode ? 'white' : '#6930C3',
-        labelStyle: {
-          fontSize: 14,
-          marginBottom: 18,
-          fontWeight: 'bold',
-        },
+        keyboardHidesTabBar: true,
         style: {
           ...styles.tabsNavigator,
           backgroundColor: bkgStyle.secBkgColor,
@@ -29,6 +26,12 @@ const TabsNavigator = props => {
       }}>
       <Tab.Screen
         name="Home"
+        options={{
+          tabBarIcon: ({color, focused}) => {
+            let iconName = focused ? 'home' : 'home-outline';
+            return <Ionicons name={iconName} color={color} size={26} />;
+          },
+        }}
         children={() => (
           <HomeScreen
             bkgStyle={bkgStyle}
@@ -40,14 +43,32 @@ const TabsNavigator = props => {
       />
       <Tab.Screen
         name="Search"
+        options={{
+          tabBarIcon: ({color, focused}) => {
+            let iconName = focused ? 'search' : 'search-outline';
+            return <Ionicons name={iconName} color={color} size={28} />;
+          },
+        }}
         children={() => <SearchScreen bkgStyle={bkgStyle} />}
       />
       <Tab.Screen
         name="WatchList"
+        options={{
+          tabBarIcon: ({color, focused}) => {
+            let iconName = focused ? 'bookmarks' : 'bookmarks-outline';
+            return <Ionicons name={iconName} color={color} size={26} />;
+          },
+        }}
         children={() => <WatchListScreen bkgStyle={bkgStyle} />}
       />
       <Tab.Screen
         name="Favourites"
+        options={{
+          tabBarIcon: ({color, focused}) => {
+            let iconName = focused ? 'heart' : 'heart-outline';
+            return <Ionicons name={iconName} color={color} size={26} />;
+          },
+        }}
         children={() => <FavouritesScreen bkgStyle={bkgStyle} />}
       />
     </Tab.Navigator>
