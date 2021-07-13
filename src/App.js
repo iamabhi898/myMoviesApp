@@ -9,9 +9,10 @@ const App = () => {
   // Theme - Coloring
   const [isDarkMode, setIsDarkMode] = React.useState(false);
   const bkgStyle = {
-    bkgColor: isDarkMode ? '#050505' : '#EBEBEB',
+    bkgColor: isDarkMode ? '#262626' : '#EBEBEB',
     secBkgColor: isDarkMode ? '#221F3B' : 'white',
     txtColor: isDarkMode ? '#EBEBEB' : '#050505',
+    secTxtColor: isDarkMode ? '#EBEBEB' : '#4f4f4f',
     cardBlurBkg: isDarkMode
       ? 'rgba(52, 52, 52, 0.7)'
       : 'rgba(152, 152, 152, 0.8)',
@@ -97,7 +98,7 @@ export default App;
 Color Palette => 
 purple : #6F4A8E
 gray : #221F3B
-black : #050505
+black : #262626
 white : #EBEBEB
 
 

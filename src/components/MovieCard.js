@@ -9,6 +9,16 @@ const MovieCard = props => {
     setMoviePoster(`http://image.tmdb.org/t/p/w300/${poster}`);
   }, []);
 
+  const getRatingTxtColor = rating => {
+    if (rating >= 6) {
+      return '#03fc3d';
+    } else if (rating >= 4 && rating < 6) {
+      return 'yellow';
+    } else if (rating < 4) {
+      return '#fc3d03';
+    }
+  };
+
   return (
     <TouchableOpacity activeOpacity={0.9}>
       <View
@@ -28,7 +38,17 @@ const MovieCard = props => {
           <Text style={{...styles.txt}} numberOfLines={2}>
             {title}
           </Text>
-          <Text style={{...styles.txt}}>{rating} ⭐</Text>
+          <View
+            style={{
+              ...styles.ratingWrapper,
+              borderColor: getRatingTxtColor(rating),
+              backgroundColor: bkgStyle.cardBlurBkg,
+            }}>
+            <Text style={{...styles.txt, color: getRatingTxtColor(rating)}}>
+              {rating * 10}
+              <Text style={{fontSize: 6}}>%</Text>
+            </Text>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -67,6 +87,17 @@ const styles = StyleSheet.create({
     padding: 10,
     width: '100%',
     bottom: 0,
+  },
+  ratingWrapper: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    right: 6,
+    top: -25,
+    height: 34,
+    width: 34,
+    borderRadius: 17,
+    borderWidth: 1,
   },
   txt: {
     fontSize: 13,
