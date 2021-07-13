@@ -3,10 +3,10 @@ import {StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import HomeScreen from '../screens/HomeScreen';
 import SearchScreen from '../screens/SearchScreen';
 import WatchListScreen from '../screens/WatchListScreen';
 import FavouritesScreen from '../screens/FavouritesScreen';
+import HomeStackNavigator from './HomeStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +25,7 @@ const TabsNavigator = props => {
         },
       }}>
       <Tab.Screen
-        name="Home"
+        name="HomeStack"
         options={{
           tabBarIcon: ({color, focused}) => {
             let iconName = focused ? 'home' : 'home-outline';
@@ -33,7 +33,7 @@ const TabsNavigator = props => {
           },
         }}
         children={() => (
-          <HomeScreen
+          <HomeStackNavigator
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
             setIsDarkMode={setIsDarkMode}

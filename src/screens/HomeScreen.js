@@ -16,53 +16,62 @@ import PopularSection from '../components/PopularSection';
 import TopRatedSection from '../components/TopRatedSection';
 
 const HomeScreen = props => {
-  const {bkgStyle, isDarkMode, setIsDarkMode, moviesState} = props;
+  const {navigation, bkgStyle, isDarkMode, setIsDarkMode, moviesState} = props;
+
+  const DropDownMenu = () => {
+    return (
+      <Menu>
+        <MenuTrigger>
+          <Ionicons
+            name="ellipsis-vertical-outline"
+            color="gray"
+            size={25}
+            style={{padding: 10}}
+          />
+        </MenuTrigger>
+        <MenuOptions style={{backgroundColor: bkgStyle.secBkgColor}}>
+          <MenuOption
+            onSelect={() => {
+              setIsDarkMode(!isDarkMode);
+            }}>
+            <View style={styles.menuPopupLine}>
+              <Ionicons
+                name={isDarkMode ? 'sunny-outline' : 'moon-outline'}
+                color={bkgStyle.secTxtColor}
+                size={20}
+              />
+              <Text style={{...styles.menuTxt, color: bkgStyle.secTxtColor}}>
+                {isDarkMode ? 'Light Theme' : 'Dark Theme'}
+              </Text>
+            </View>
+          </MenuOption>
+          <MenuOption
+            onSelect={() => {
+              navigation.navigate('About');
+            }}>
+            <View style={styles.menuPopupLine}>
+              <Ionicons
+                name="alert-circle-outline"
+                color={bkgStyle.secTxtColor}
+                size={20}
+              />
+              <Text style={{...styles.menuTxt, color: bkgStyle.secTxtColor}}>
+                About App
+              </Text>
+            </View>
+          </MenuOption>
+        </MenuOptions>
+      </Menu>
+    );
+  };
+
   return (
     <MenuProvider>
       <ScrollView
         style={{...styles.screen, backgroundColor: bkgStyle.bkgColor}}>
         <View style={styles.header}>
           <Text style={styles.title}>My Movies</Text>
-          <Menu>
-            <MenuTrigger>
-              <Ionicons
-                name="ellipsis-vertical-outline"
-                color="gray"
-                size={25}
-              />
-            </MenuTrigger>
-            <MenuOptions style={{backgroundColor: bkgStyle.secBkgColor}}>
-              <MenuOption
-                onSelect={() => {
-                  setIsDarkMode(!isDarkMode);
-                }}>
-                <View style={styles.menuPopupLine}>
-                  <Ionicons
-                    name={isDarkMode ? 'sunny-outline' : 'moon-outline'}
-                    color={bkgStyle.secTxtColor}
-                    size={20}
-                  />
-                  <Text
-                    style={{...styles.menuTxt, color: bkgStyle.secTxtColor}}>
-                    {isDarkMode ? 'Light Theme' : 'Dark Theme'}
-                  </Text>
-                </View>
-              </MenuOption>
-              <MenuOption onSelect={() => {}}>
-                <View style={styles.menuPopupLine}>
-                  <Ionicons
-                    name="alert-circle-outline"
-                    color={bkgStyle.secTxtColor}
-                    size={20}
-                  />
-                  <Text
-                    style={{...styles.menuTxt, color: bkgStyle.secTxtColor}}>
-                    About App
-                  </Text>
-                </View>
-              </MenuOption>
-            </MenuOptions>
-          </Menu>
+          <DropDownMenu />
         </View>
         <MovieCarousel
           bkgStyle={bkgStyle}
@@ -88,7 +97,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
   },
   title: {
     fontSize: 28,
