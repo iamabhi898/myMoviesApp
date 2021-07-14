@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 
 const MovieCard = props => {
-  const {movieId, title, rating, poster, bkgStyle} = props;
+  const {movieId, title, rating, poster, bkgStyle, navigation} = props;
   const [moviePoster, setMoviePoster] = React.useState(null);
 
   React.useEffect(() => {
@@ -20,7 +20,7 @@ const MovieCard = props => {
   };
 
   return (
-    <TouchableOpacity activeOpacity={0.9}>
+    <TouchableOpacity activeOpacity={0.9} onPress={() => {}}>
       <View
         style={{...styles.cardWrapper, backgroundColor: bkgStyle.secBkgColor}}>
         <View style={styles.image}>

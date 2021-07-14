@@ -4,14 +4,13 @@ import {StyleSheet, View, Text, ScrollView} from 'react-native';
 import MovieCard from './MovieCard';
 
 const TrendingSection = props => {
-  const {bkgStyle, movies} = props;
+  const {bkgStyle, movies, navigation} = props;
   return (
     <View style={styles.wrapper}>
       <View style={styles.titleWrapper}>
         <Text style={{...styles.title, color: bkgStyle.txtColor}}>
           Trending
         </Text>
-        <Text style={styles.viewMore}>View More</Text>
       </View>
       <ScrollView
         horizontal={true}
@@ -25,6 +24,7 @@ const TrendingSection = props => {
             rating={item.vote_average}
             poster={item.poster_path}
             bkgStyle={bkgStyle}
+            navigation={navigation}
           />
         ))}
         <View style={styles.paddingRightEnd}></View>
@@ -47,11 +47,6 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 20,
-  },
-  viewMore: {
-    color: '#777',
-    fontWeight: 'bold',
-    fontSize: 14,
   },
   horizontalScroll: {
     paddingLeft: 10,

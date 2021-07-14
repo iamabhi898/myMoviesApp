@@ -7,13 +7,14 @@ import {
   StyleSheet,
   Dimensions,
   Animated,
+  TouchableOpacity,
 } from 'react-native';
 
 const vw = Dimensions.get('window').width;
 const vh = Dimensions.get('window').height;
 
 const MovieCarousel = props => {
-  const {movies, bkgStyle, isDarkMode} = props;
+  const {movies, bkgStyle, isDarkMode, navigation} = props;
   let topMovies = movies.slice(0, 5);
 
   const getPosterPath = poster => `http://image.tmdb.org/t/p/w500/${poster}`;
@@ -33,21 +34,26 @@ const MovieCarousel = props => {
         )}
         style={{...styles.wrapper, width: vw, height: vh * 0.25}}>
         {topMovies.map(item => (
-          <View key={item.id} style={{...styles.imageWrapper, width: vw}}>
-            <Image
-              source={{uri: getPosterPath(item.backdrop_path)}}
-              style={{...styles.image, height: '100%', width: vw * 0.9}}
-            />
-            <View
-              style={{
-                ...styles.details,
-                backgroundColor: bkgStyle.cardBlurBkg,
-              }}>
-              <Text style={{...styles.txt}} numberOfLines={1}>
-                {item.title}
-              </Text>
+          <TouchableOpacity
+            key={item.id}
+            activeOpacity={0.9}
+            onPress={() => {}}>
+            <View style={{...styles.imageWrapper, width: vw}}>
+              <Image
+                source={{uri: getPosterPath(item.backdrop_path)}}
+                style={{...styles.image, height: '100%', width: vw * 0.9}}
+              />
+              <View
+                style={{
+                  ...styles.details,
+                  backgroundColor: bkgStyle.cardBlurBkg,
+                }}>
+                <Text style={{...styles.txt}} numberOfLines={1}>
+                  {item.title}
+                </Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
       <View style={styles.dotView}>
