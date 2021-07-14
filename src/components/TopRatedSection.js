@@ -1,17 +1,33 @@
 import React from 'react';
-import {StyleSheet, View, Text, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 
 import MovieCard from './MovieCard';
 
 const TopRatedSection = props => {
-  const {bkgStyle, movies} = props;
+  const {bkgStyle, movies, navigation} = props;
   return (
     <View style={styles.wrapper}>
       <View style={styles.titleWrapper}>
         <Text style={{...styles.title, color: bkgStyle.txtColor}}>
           Top Rated
         </Text>
-        <Text style={styles.viewMore}>View More</Text>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => {
+            navigation.navigate('ViewMore', {
+              screenTitle: 'Top Rated',
+              movies: movies,
+            });
+          }}
+          style={{padding: 5}}>
+          <Text style={styles.viewMore}>View More</Text>
+        </TouchableOpacity>
       </View>
       <ScrollView
         horizontal={true}
@@ -25,6 +41,7 @@ const TopRatedSection = props => {
             rating={item.vote_average}
             poster={item.poster_path}
             bkgStyle={bkgStyle}
+            navigation={navigation}
           />
         ))}
         <View style={styles.paddingRightEnd}></View>

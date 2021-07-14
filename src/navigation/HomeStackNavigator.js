@@ -4,6 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from '../screens/HomeScreen';
 import AboutScreen from '../screens/AboutScreen';
+import ViewMoreScreen from '../screens/ViewMoreScreen';
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,33 @@ const HomeStackNavigator = props => {
         headerShown={false}
         children={() => (
           <AboutScreen bkgStyle={bkgStyle} isDarkMode={isDarkMode} />
+        )}
+      />
+      <Stack.Screen
+        name="ViewMore"
+        options={({route}) => {
+          return {
+            title: route.params.screenTitle,
+            headerTintColor: bkgStyle.secTxtColor,
+            headerStyle: {
+              backgroundColor: bkgStyle.bkgColor,
+              borderBottomWidth: 1,
+              borderBottomColor: 'gray',
+            },
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              color: bkgStyle.secTxtColor,
+            },
+          };
+        }}
+        headerShown={false}
+        children={({navigation, route}) => (
+          <ViewMoreScreen
+            bkgStyle={bkgStyle}
+            isDarkMode={isDarkMode}
+            navigation={navigation}
+            route={route}
+          />
         )}
       />
     </Stack.Navigator>

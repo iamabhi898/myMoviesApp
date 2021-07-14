@@ -77,11 +77,28 @@ const HomeScreen = props => {
           bkgStyle={bkgStyle}
           isDarkMode={isDarkMode}
           movies={moviesState.trending}
+          navigation={navigation}
         />
-        <TrendingSection bkgStyle={bkgStyle} movies={moviesState.trending} />
-        <UpcomingSection bkgStyle={bkgStyle} movies={moviesState.upcoming} />
-        <PopularSection bkgStyle={bkgStyle} movies={moviesState.popular} />
-        <TopRatedSection bkgStyle={bkgStyle} movies={moviesState.topRated} />
+        <TrendingSection
+          bkgStyle={bkgStyle}
+          movies={moviesState.trending}
+          navigation={navigation}
+        />
+        <UpcomingSection
+          bkgStyle={bkgStyle}
+          movies={moviesState.upcoming}
+          navigation={navigation}
+        />
+        <PopularSection
+          bkgStyle={bkgStyle}
+          movies={moviesState.popular}
+          navigation={navigation}
+        />
+        <TopRatedSection
+          bkgStyle={bkgStyle}
+          movies={moviesState.topRated}
+          navigation={navigation}
+        />
         <View style={styles.paddingView}></View>
       </ScrollView>
     </MenuProvider>
