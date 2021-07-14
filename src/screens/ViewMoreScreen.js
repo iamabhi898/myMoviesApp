@@ -81,7 +81,7 @@ const ViewMoreScreen = props => {
           renderItem={renderMovieItem}
           contentContainerStyle={styles.flatlistContainer}
           showsVerticalScrollIndicator={false}
-          onEndReachedThreshold={0.3}
+          onEndReachedThreshold={0.9}
           onEndReached={() => {
             fetchMovies(setAllMovies, route.params.screenTitle, pgNum);
           }}

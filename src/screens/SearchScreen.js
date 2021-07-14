@@ -1,11 +1,109 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, TextInput, FlatList, StyleSheet} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import MovieCard from '../components/MovieCard';
+import config from '../../config';
 
 const SearchScreen = props => {
   const {bkgStyle} = props;
+  const [inputValue, setInputValue] = React.useState(null);
+  const [searchFlag, setSearchFlag] = React.useState(false);
+  const [pgNum, setPgNum] = React.useState(1);
+  const [searchedMovies, setSearchedMovies] = React.useState([]);
+
+  const fetchMovies = async (setSearchedMovies, inputText, pgNum) => {
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=${config.API_KEY}&language=en-US&query=${inputText}&page=${pgNum}&include_adult=false`;
+    try {
+      await fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          setSearchedMovies(state => {
+            let movies = data.results;
+            return [...state, ...movies];
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+
+    if (pgNum < 10) {
+      setPgNum(state => state + 1);
+    }
+  };
+
+  const handleSearchedMovies = () => {
+    setSearchFlag(false);
+    setPgNum(1);
+    setSearchedMovies([]);
+  };
+
+  const handlefetch = () => {
+    setSearchFlag(true);
+    setPgNum(1);
+    setSearchedMovies([]);
+  };
+
+  React.useEffect(() => {
+    if (searchFlag && pgNum === 1 && searchedMovies.length === 0) {
+      fetchMovies(setSearchedMovies, inputValue, pgNum);
+    }
+  }, [pgNum, searchedMovies]);
+
+  const renderMovieItem = ({item}) => {
+    return (
+      <MovieCard
+        key={item.id}
+        movieId={item.id}
+        title={item.title}
+        rating={item.vote_average}
+        poster={item.poster_path}
+        bkgStyle={bkgStyle}
+      />
+    );
+  };
+
   return (
     <View style={{...styles.screen, backgroundColor: bkgStyle.bkgColor}}>
-      <Text style={{color: bkgStyle.txtColor}}>Search Screen</Text>
+      <View
+        style={{
+          ...styles.textInputWrapper,
+          backgroundColor: bkgStyle.secBkgColor,
+        }}>
+        <Ionicons name={'search-outline'} color={'#888'} size={26} />
+        <TextInput
+          placeholder="Search"
+          placeholderTextColor={bkgStyle.placeholderColor}
+          selectionColor={'#888'}
+          value={inputValue}
+          onChangeText={value => {
+            setInputValue(value);
+          }}
+          onSubmitEditing={() => {
+            if (inputValue !== null) {
+              inputValue.length === 0 ? handleSearchedMovies() : handlefetch();
+            }
+          }}
+          style={{...styles.textInput, color: bkgStyle.secTxtColor}}
+        />
+      </View>
+      <View style={styles.flatlistWrapper}>
+        <FlatList
+          data={searchedMovies}
+          numColumns={2}
+          keyExtractor={item => item.id}
+          renderItem={renderMovieItem}
+          contentContainerStyle={styles.flatlistContainer}
+          showsVerticalScrollIndicator={false}
+          onEndReachedThreshold={0.9}
+          onEndReached={() => {
+            fetchMovies(setSearchedMovies, inputValue, pgNum);
+          }}
+        />
+      </View>
     </View>
   );
 };
@@ -13,8 +111,41 @@ const SearchScreen = props => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    alignItems: 'center',
+  },
+  textInputWrapper: {
+    position: 'absolute',
+    flexDirection: 'row',
+    alignItems: 'center',
+    zIndex: 1,
+    height: 50,
+    width: '90%',
+    marginVertical: 20,
+    paddingHorizontal: 15,
+    borderRadius: 25,
+    //shadow
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 6,
+  },
+  textInput: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 10,
+  },
+  flatlistWrapper: {
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  flatlistContainer: {
+    paddingTop: 90,
+    paddingBottom: 200,
+    justifyContent: 'space-between',
   },
 });
 
