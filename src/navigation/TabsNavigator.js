@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Keyboard} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -12,6 +12,17 @@ const Tab = createBottomTabNavigator();
 
 const TabsNavigator = props => {
   const {bkgStyle, isDarkMode, setIsDarkMode, moviesState} = props;
+  const [isKeyboardShown, setIsKeyboardShown] = React.useState(false);
+
+  React.useEffect(() => {
+    Keyboard.addListener('keyboardDidShow', () => {
+      setIsKeyboardShown(true);
+    });
+    Keyboard.addListener('keyboardDidHide', () => {
+      setIsKeyboardShown(false);
+    });
+  }, []);
+
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -22,6 +33,7 @@ const TabsNavigator = props => {
         style: {
           ...styles.tabsNavigator,
           backgroundColor: bkgStyle.secBkgColor,
+          bottom: isKeyboardShown ? -10 : 15,
         },
       }}>
       <Tab.Screen
@@ -66,7 +78,7 @@ const TabsNavigator = props => {
         options={{
           tabBarIcon: ({color, focused}) => {
             let iconName = focused ? 'heart' : 'heart-outline';
-            return <Ionicons name={iconName} color={color} size={26} />;
+            return <Ionicons name={iconName} color={color} size={28} />;
           },
         }}
         children={() => <FavouritesScreen bkgStyle={bkgStyle} />}
@@ -78,7 +90,6 @@ const TabsNavigator = props => {
 const styles = StyleSheet.create({
   tabsNavigator: {
     position: 'absolute',
-    bottom: 15,
     left: 15,
     right: 15,
     borderRadius: 30,
