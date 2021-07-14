@@ -9,6 +9,7 @@ const App = () => {
   // Theme - Coloring
   const [isDarkMode, setIsDarkMode] = React.useState(false);
   const bkgStyle = {
+    titleColor: isDarkMode ? '#888' : '#6930C3',
     bkgColor: isDarkMode ? '#262626' : '#EBEBEB',
     secBkgColor: isDarkMode ? '#221F3B' : 'white',
     txtColor: isDarkMode ? '#EBEBEB' : '#050505',
@@ -97,7 +98,7 @@ export default App;
 /*
 
 Color Palette => 
-purple : #6F4A8E
+purple : #6930C3
 gray : #221F3B
 black : #262626
 white : #EBEBEB

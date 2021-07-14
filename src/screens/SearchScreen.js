@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginLeft: 10,
+    width: '85%',
   },
   flatlistWrapper: {
     width: '100%',
