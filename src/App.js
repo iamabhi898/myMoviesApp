@@ -15,6 +15,7 @@ const App = () => {
     txtColor: isDarkMode ? '#EBEBEB' : '#050505',
     secTxtColor: isDarkMode ? '#EBEBEB' : '#4f4f4f',
     placeholderColor: isDarkMode ? '#888' : '#888',
+    searchIcon: isDarkMode ? '#EBEBEB' : '#6930C3',
     cardBlurBkg: isDarkMode
       ? 'rgba(52, 52, 52, 0.7)'
       : 'rgba(152, 152, 152, 0.8)',
@@ -35,7 +36,7 @@ const App = () => {
         url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${config.API_KEY}`;
         break;
       case 'upcoming':
-        url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${config.API_KEY}&language=en-US&page=1`;
+        url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${config.API_KEY}&language=en-US&page=1&region=us`;
         break;
       case 'popular':
         url = `https://api.themoviedb.org/3/movie/popular?api_key=${config.API_KEY}&language=en-US&page=1`;
@@ -107,7 +108,7 @@ white : #EBEBEB
 TMDb API calls =>
 
 trending : `https://api.themoviedb.org/3/trending/movie/day?api_key=${config.API_KEY}`
-upcoming : `https://api.themoviedb.org/3/movie/upcoming?api_key=${config.API_KEY}&language=en-US&page=1`
+upcoming : `https://api.themoviedb.org/3/movie/upcoming?api_key=${config.API_KEY}&language=en-US&page=1&region=us`
 popular : `https://api.themoviedb.org/3/movie/popular?api_key=${config.API_KEY}&language=en-US&page=1`
 topRated : `https://api.themoviedb.org/3/movie/top_rated?api_key=${config.API_KEY}&language=en-US&page=1` 
 

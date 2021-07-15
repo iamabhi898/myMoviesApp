@@ -3,10 +3,10 @@ import {StyleSheet, Keyboard} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import SearchScreen from '../screens/SearchScreen';
 import WatchListScreen from '../screens/WatchListScreen';
 import FavouritesScreen from '../screens/FavouritesScreen';
 import HomeStackNavigator from './HomeStackNavigator';
+import SearchStackNavigator from './SearchStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,6 +25,7 @@ const TabsNavigator = props => {
 
   return (
     <Tab.Navigator
+      initialRouteName="HomeStack"
       tabBarOptions={{
         showLabel: false,
         inactiveTintColor: isDarkMode ? '#555' : '#999',
@@ -54,14 +55,16 @@ const TabsNavigator = props => {
         )}
       />
       <Tab.Screen
-        name="Search"
+        name="SearchStack"
         options={{
           tabBarIcon: ({color, focused}) => {
             let iconName = focused ? 'search' : 'search-outline';
             return <Ionicons name={iconName} color={color} size={28} />;
           },
         }}
-        children={() => <SearchScreen bkgStyle={bkgStyle} />}
+        children={() => (
+          <SearchStackNavigator bkgStyle={bkgStyle} isDarkMode={isDarkMode} />
+        )}
       />
       <Tab.Screen
         name="WatchList"

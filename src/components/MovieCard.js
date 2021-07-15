@@ -38,17 +38,19 @@ const MovieCard = props => {
           <Text style={{...styles.txt}} numberOfLines={2}>
             {title}
           </Text>
-          <View
-            style={{
-              ...styles.ratingWrapper,
-              borderColor: getRatingTxtColor(rating),
-              backgroundColor: bkgStyle.cardBlurBkg,
-            }}>
-            <Text style={{...styles.txt, color: getRatingTxtColor(rating)}}>
-              {rating * 10}
-              <Text style={{fontSize: 6}}>%</Text>
-            </Text>
-          </View>
+          {rating === 0 ? null : (
+            <View
+              style={{
+                ...styles.ratingWrapper,
+                borderColor: getRatingTxtColor(rating),
+                backgroundColor: bkgStyle.cardBlurBkg,
+              }}>
+              <Text style={{...styles.txt, color: getRatingTxtColor(rating)}}>
+                {rating * 10}
+                <Text style={{fontSize: 6}}>%</Text>
+              </Text>
+            </View>
+          )}
         </View>
       </View>
     </TouchableOpacity>
