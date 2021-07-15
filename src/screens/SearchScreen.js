@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TextInput, FlatList, StyleSheet} from 'react-native';
+import {View, Text, TextInput, FlatList, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import MovieCard from '../components/MovieCard';
@@ -11,6 +11,7 @@ const SearchScreen = props => {
   const [searchFlag, setSearchFlag] = React.useState(false);
   const [pgNum, setPgNum] = React.useState(1);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
+  const [isFoundResults, setIsFoundResults] = React.useState(true);
 
   const fetchMovies = async (setSearchedMovies, inputText, pgNum) => {
     let url = `https://api.themoviedb.org/3/search/movie?api_key=${config.API_KEY}&language=en-US&query=${inputText}&page=${pgNum}&include_adult=false`;
@@ -22,6 +23,11 @@ const SearchScreen = props => {
             let movies = data.results;
             return [...state, ...movies];
           });
+          if (data.results.length === 0) {
+            setIsFoundResults(false);
+          } else if (data.results.length !== 0) {
+            setIsFoundResults(true);
+          }
         })
         .catch(error => {
           console.log(error);
@@ -78,18 +84,42 @@ const SearchScreen = props => {
           placeholder="Search"
           placeholderTextColor={bkgStyle.placeholderColor}
           selectionColor={'#888'}
+          returnKeyType={'search'}
           value={inputValue}
           onChangeText={value => {
             setInputValue(value);
           }}
           onSubmitEditing={() => {
+            setIsFoundResults(true); // just to disappear the sorry text
             if (inputValue !== null) {
               inputValue.length === 0 ? handleSearchedMovies() : handlefetch();
             }
           }}
           style={{...styles.textInput, color: bkgStyle.secTxtColor}}
         />
+        <Ionicons name={'filter-outline'} color={'#888'} size={26} />
       </View>
+      {!isFoundResults && searchFlag && searchedMovies.length === 0 ? (
+        <View style={{position: 'absolute', top: 150}}>
+          <Text
+            style={{
+              color: bkgStyle.placeholderColor,
+              fontSize: 28,
+              fontWeight: 'bold',
+            }}>
+            <Ionicons name={'search'} color={'#888'} size={24} /> Sorry,
+          </Text>
+          <Text
+            style={{
+              color: bkgStyle.placeholderColor,
+              fontSize: 18,
+              fontWeight: 'bold',
+              marginLeft: 30,
+            }}>
+            no results found.
+          </Text>
+        </View>
+      ) : null}
       <View style={styles.flatlistWrapper}>
         <FlatList
           data={searchedMovies}
@@ -117,6 +147,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     zIndex: 1,
     height: 50,
     width: '90%',
@@ -135,8 +166,8 @@ const styles = StyleSheet.create({
   textInput: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginLeft: 10,
-    width: '85%',
+    marginHorizontal: '3%',
+    width: '80%',
   },
   flatlistWrapper: {
     width: '100%',
