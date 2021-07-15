@@ -12,7 +12,7 @@ const HomeStackNavigator = props => {
   const {bkgStyle, isDarkMode, setIsDarkMode, moviesState} = props;
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
         name="Home"
         options={{

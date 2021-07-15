@@ -6,7 +6,7 @@ import MovieCard from '../components/MovieCard';
 import config from '../../config';
 
 const SearchScreen = props => {
-  const {bkgStyle} = props;
+  const {bkgStyle, navigation} = props;
   const [inputValue, setInputValue] = React.useState(null);
   const [searchFlag, setSearchFlag] = React.useState(false);
   const [pgNum, setPgNum] = React.useState(1);
@@ -97,7 +97,14 @@ const SearchScreen = props => {
           }}
           style={{...styles.textInput, color: bkgStyle.secTxtColor}}
         />
-        <Ionicons name={'filter-outline'} color={'#888'} size={26} />
+        <Ionicons
+          name={'color-filter-outline'}
+          color={'#888'}
+          size={26}
+          onPress={() => {
+            navigation.navigate('Discover');
+          }}
+        />
       </View>
       {!isFoundResults && searchFlag && searchedMovies.length === 0 ? (
         <View style={{position: 'absolute', top: 150}}>

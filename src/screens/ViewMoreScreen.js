@@ -15,7 +15,7 @@ const ViewMoreScreen = props => {
 
     switch (category) {
       case 'Upcoming':
-        url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${config.API_KEY}&language=en-US&page=${pgNum}`;
+        url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${config.API_KEY}&language=en-US&page=${pgNum}&region=us`;
         break;
       case 'Popular':
         url = `https://api.themoviedb.org/3/movie/popular?api_key=${config.API_KEY}&language=en-US&page=${pgNum}`;
