@@ -70,7 +70,9 @@ const HomeScreen = props => {
       <ScrollView
         style={{...styles.screen, backgroundColor: bkgStyle.bkgColor}}>
         <View style={styles.header}>
-          <Text style={styles.title}>My Movies</Text>
+          <Text style={{...styles.title, color: bkgStyle.titleColor}}>
+            My Movies
+          </Text>
           <DropDownMenu />
         </View>
         <MovieCarousel
@@ -120,7 +122,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     paddingHorizontal: 20,
-    color: '#6F4A8E',
   },
   paddingView: {
     paddingBottom: 90,
