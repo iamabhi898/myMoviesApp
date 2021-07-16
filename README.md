@@ -1,6 +1,6 @@
 # My Movies
 
-<img src="https://user-images.githubusercontent.com/59258140/125776825-205751aa-b49a-47c1-b4e7-614a26d2b0f3.jpg" width="">
+<img src="https://user-images.githubusercontent.com/59258140/125776825-205751aa-b49a-47c1-b4e7-614a26d2b0f3.jpg" alt="home" width="600px">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/59258140/125934676-ed44f845-78c0-4ab2-b0f2-9b394f243d09.jpg" alt="search" width="600px">
 
 > A Movies App that allows you to search and discover movies to save them to your watchlist or your favourites.
 
