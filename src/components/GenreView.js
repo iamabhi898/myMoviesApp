@@ -16,7 +16,11 @@ const GenreView = props => {
         ? '#050505'
         : '#EBEBEB'
       : bkgStyle.txtColor,
-    borderColor: isSelected ? '#6930C3' : bkgStyle.txtColor,
+    borderColor: isSelected
+      ? isDarkMode
+        ? '#EBEBEB'
+        : '#6930C3'
+      : bkgStyle.txtColor,
   };
 
   React.useEffect(() => {
