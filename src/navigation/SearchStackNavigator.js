@@ -17,8 +17,12 @@ const SearchStackNavigator = props => {
         options={{
           headerShown: false,
         }}
-        children={({navigation}) => (
-          <SearchScreen bkgStyle={bkgStyle} navigation={navigation} />
+        children={({navigation, route}) => (
+          <SearchScreen
+            bkgStyle={bkgStyle}
+            navigation={navigation}
+            route={route}
+          />
         )}
       />
       <Stack.Screen
@@ -37,7 +41,7 @@ const SearchStackNavigator = props => {
           },
         }}
         headerShown={false}
-        children={({navigation}) => (
+        children={({navigation, route}) => (
           <DiscoverScreen
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}

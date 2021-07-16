@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 const GenreView = props => {
-  const {bkgStyle, isDarkMode, genre} = props;
+  const {bkgStyle, isDarkMode, genre, onSelect} = props;
   const [isSelected, setIsSelected] = React.useState(false);
 
   const color = {
@@ -18,6 +18,10 @@ const GenreView = props => {
       : bkgStyle.txtColor,
     borderColor: isSelected ? '#6930C3' : bkgStyle.txtColor,
   };
+
+  React.useEffect(() => {
+    onSelect(genre, isSelected);
+  }, [isSelected]);
 
   return (
     <TouchableOpacity
@@ -35,7 +39,11 @@ const GenreView = props => {
           ...styles.genreTxt,
           color: color.txtColor,
         }}>
-        {genre}
+        {genre === 'Science_Fiction'
+          ? 'Science Fiction'
+          : genre === 'TV_Movie'
+          ? 'TV Movie'
+          : genre}
       </Text>
     </TouchableOpacity>
   );
