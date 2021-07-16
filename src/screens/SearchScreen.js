@@ -6,15 +6,23 @@ import MovieCard from '../components/MovieCard';
 import config from '../../config';
 
 const SearchScreen = props => {
-  const {bkgStyle, navigation} = props;
+  const {bkgStyle, navigation, route} = props;
   const [inputValue, setInputValue] = React.useState(null);
   const [searchFlag, setSearchFlag] = React.useState(false);
   const [pgNum, setPgNum] = React.useState(1);
   const [searchedMovies, setSearchedMovies] = React.useState([]);
   const [isFoundResults, setIsFoundResults] = React.useState(true);
+  const [isDiscover, setIsDiscover] = React.useState(false);
+  const [genreIds, setGenreIds] = React.useState('');
 
   const fetchMovies = async (setSearchedMovies, inputText, pgNum) => {
-    let url = `https://api.themoviedb.org/3/search/movie?api_key=${config.API_KEY}&language=en-US&query=${inputText}&page=${pgNum}&include_adult=false`;
+    let url = !isDiscover
+      ? `https://api.themoviedb.org/3/search/movie?api_key=${config.API_KEY}&language=en-US&query=${inputText}&page=${pgNum}&include_adult=false`
+      : `https://api.themoviedb.org/3/discover/movie?api_key=${
+          config.API_KEY
+        }&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pgNum}&with_genres=${
+          genreIds !== '' ? genreIds : null
+        }`;
     try {
       await fetch(url)
         .then(response => response.json())
@@ -28,6 +36,7 @@ const SearchScreen = props => {
           } else if (data.results.length !== 0) {
             setIsFoundResults(true);
           }
+          setSearchFlag(false);
         })
         .catch(error => {
           console.log(error);
@@ -42,12 +51,14 @@ const SearchScreen = props => {
   };
 
   const handleSearchedMovies = () => {
+    setIsDiscover(false);
     setSearchFlag(false);
     setPgNum(1);
     setSearchedMovies([]);
   };
 
   const handlefetch = () => {
+    setIsDiscover(false);
     setSearchFlag(true);
     setPgNum(1);
     setSearchedMovies([]);
@@ -58,6 +69,20 @@ const SearchScreen = props => {
       fetchMovies(setSearchedMovies, inputValue, pgNum);
     }
   }, [pgNum, searchedMovies]);
+
+  React.useEffect(() => {
+    if (route.params !== undefined) {
+      if (route.params.genreIds.length !== 0) {
+        setIsDiscover(true);
+        setGenreIds(route.params.genreIds);
+        setSearchFlag(true);
+        setPgNum(1);
+        setSearchedMovies([]);
+        setInputValue(null);
+        setIsFoundResults(true); // just to disappear the sorry text
+      }
+    }
+  }, [route]);
 
   const renderMovieItem = ({item}) => {
     return (
@@ -106,7 +131,7 @@ const SearchScreen = props => {
           }}
         />
       </View>
-      {!isFoundResults && searchFlag && searchedMovies.length === 0 ? (
+      {!isFoundResults && searchedMovies.length === 0 ? (
         <View style={{position: 'absolute', top: 150}}>
           <Text
             style={{
