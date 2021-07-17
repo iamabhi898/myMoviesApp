@@ -196,13 +196,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontWeight: 'bold',
+    fontFamily: 'Roboto-Medium',
     marginLeft: 10,
   },
   genreListWrapper: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',
+    marginBottom: 30,
   },
   searchButton: {
     alignSelf: 'center',

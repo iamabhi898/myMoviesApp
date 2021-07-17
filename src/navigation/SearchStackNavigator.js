@@ -36,7 +36,8 @@ const SearchStackNavigator = props => {
             borderBottomColor: 'gray',
           },
           headerTitleStyle: {
-            fontWeight: 'bold',
+            fontFamily: 'Montserrat-SemiBold',
+            fontSize: 18,
             color: bkgStyle.secTxtColor,
           },
         }}

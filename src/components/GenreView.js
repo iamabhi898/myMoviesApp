@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   genreTxt: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 15,
+    fontFamily: 'Roboto-Regular',
   },
 });
 

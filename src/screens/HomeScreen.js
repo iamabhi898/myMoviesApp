@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 24,
     paddingHorizontal: 20,
   },
   paddingView: {
@@ -132,8 +132,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   menuTxt: {
+    fontFamily: 'Roboto-Regular',
     paddingLeft: 10,
-    fontWeight: 'bold',
     fontSize: 14,
   },
 });

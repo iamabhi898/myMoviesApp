@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text, FlatList} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 
 import config from '../../config';
 import MovieCard from '../components/MovieCard';
@@ -43,14 +43,13 @@ const ViewMoreScreen = props => {
               return [...state];
           }
         });
+        if (pgNum < 100) {
+          setPgNum(state => state + 1);
+        }
       })
       .catch(error => {
         console.log(error);
       });
-
-    if (pgNum < 100) {
-      setPgNum(state => state + 1);
-    }
   };
 
   React.useEffect(() => {
