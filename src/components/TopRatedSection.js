@@ -62,12 +62,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   title: {
-    fontWeight: 'bold',
+    fontFamily: 'Roboto-Regular',
     fontSize: 20,
   },
   viewMore: {
     color: '#777',
-    fontWeight: 'bold',
+    fontFamily: 'Roboto-Regular',
     fontSize: 14,
   },
   horizontalScroll: {

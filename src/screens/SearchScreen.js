@@ -37,16 +37,15 @@ const SearchScreen = props => {
             setIsFoundResults(true);
           }
           setSearchFlag(false);
+          if (pgNum < 100) {
+            setPgNum(state => state + 1);
+          }
         })
         .catch(error => {
           console.log(error);
         });
     } catch (err) {
       console.log(err);
-    }
-
-    if (pgNum < 10) {
-      setPgNum(state => state + 1);
     }
   };
 
@@ -197,7 +196,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Roboto-Regular',
     marginHorizontal: '3%',
     width: '80%',
   },

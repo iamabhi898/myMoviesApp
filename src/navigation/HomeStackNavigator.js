@@ -39,7 +39,8 @@ const HomeStackNavigator = props => {
             borderBottomColor: 'gray',
           },
           headerTitleStyle: {
-            fontWeight: 'bold',
+            fontFamily: 'Montserrat-SemiBold',
+            fontSize: 18,
             color: bkgStyle.secTxtColor,
           },
         }}
@@ -60,7 +61,8 @@ const HomeStackNavigator = props => {
               borderBottomColor: 'gray',
             },
             headerTitleStyle: {
-              fontWeight: 'bold',
+              fontFamily: 'Montserrat-SemiBold',
+              fontSize: 18,
               color: bkgStyle.secTxtColor,
             },
           };

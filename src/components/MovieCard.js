@@ -35,7 +35,7 @@ const MovieCard = props => {
         </View>
         <View
           style={{...styles.details, backgroundColor: bkgStyle.cardBlurBkg}}>
-          <Text style={{...styles.txt}} numberOfLines={2}>
+          <Text style={{...styles.titleTxt}} numberOfLines={2}>
             {title}
           </Text>
           {rating === 0 ? null : (
@@ -45,7 +45,8 @@ const MovieCard = props => {
                 borderColor: getRatingTxtColor(rating),
                 backgroundColor: bkgStyle.cardBlurBkg,
               }}>
-              <Text style={{...styles.txt, color: getRatingTxtColor(rating)}}>
+              <Text
+                style={{...styles.titleTxt, color: getRatingTxtColor(rating)}}>
                 {rating * 10}
                 <Text style={{fontSize: 6}}>%</Text>
               </Text>
@@ -101,10 +102,10 @@ const styles = StyleSheet.create({
     borderRadius: 17,
     borderWidth: 1,
   },
-  txt: {
+  titleTxt: {
     fontSize: 13,
     color: 'white',
-    fontWeight: 'bold',
+    fontFamily: 'Roboto-Regular',
   },
 });
 

@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   txt: {
     fontSize: 13,
     color: 'white',
-    fontWeight: 'bold',
+    fontFamily: 'Roboto-Regular',
   },
 });
 
