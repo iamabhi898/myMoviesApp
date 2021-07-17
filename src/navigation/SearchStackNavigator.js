@@ -4,6 +4,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import SearchScreen from '../screens/SearchScreen';
 import DiscoverScreen from '../screens/DiscoverScreen';
+import MovieScreen from '../screens/MovieScreen';
+import MovieHeaderIcons from '../components/MovieHeaderIcons';
 
 const Stack = createStackNavigator();
 
@@ -41,12 +43,35 @@ const SearchStackNavigator = props => {
             color: bkgStyle.secTxtColor,
           },
         }}
-        headerShown={false}
         children={({navigation, route}) => (
           <DiscoverScreen
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
             navigation={navigation}
+          />
+        )}
+      />
+      <Stack.Screen
+        name="Movie"
+        options={{
+          headerTitle: false,
+          headerTintColor: bkgStyle.secTxtColor,
+          headerStyle: {
+            backgroundColor: bkgStyle.bkgColor,
+            borderBottomWidth: 1,
+            borderBottomColor: 'gray',
+          },
+          headerRightContainerStyle: {
+            marginRight: 20,
+          },
+          headerRight: () => <MovieHeaderIcons />,
+        }}
+        children={({navigation, route}) => (
+          <MovieScreen
+            bkgStyle={bkgStyle}
+            isDarkMode={isDarkMode}
+            navigation={navigation}
+            movieId={route.params.movieId}
           />
         )}
       />

@@ -19,6 +19,9 @@ const App = () => {
     cardBlurBkg: isDarkMode
       ? 'rgba(52, 52, 52, 0.7)'
       : 'rgba(152, 152, 152, 0.8)',
+    backdropGradient: isDarkMode
+      ? ['#26262600', '#262626']
+      : ['#EBEBEB00', '#EBEBEB'],
   };
 
   const [moviesState, setMoviesState] = React.useState({

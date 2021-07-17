@@ -37,7 +37,9 @@ const MovieCarousel = props => {
           <TouchableOpacity
             key={item.id}
             activeOpacity={0.9}
-            onPress={() => {}}>
+            onPress={() => {
+              navigation.navigate('Movie', {movieId: item.id});
+            }}>
             <View style={{...styles.imageWrapper, width: vw}}>
               <Image
                 source={{uri: getPosterPath(item.backdrop_path)}}

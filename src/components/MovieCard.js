@@ -10,9 +10,9 @@ const MovieCard = props => {
   }, []);
 
   const getRatingTxtColor = rating => {
-    if (rating >= 6) {
+    if (rating >= 6.5) {
       return '#03fc3d';
-    } else if (rating >= 4 && rating < 6) {
+    } else if (rating >= 4 && rating < 6.5) {
       return 'yellow';
     } else if (rating < 4) {
       return '#fc3d03';
@@ -20,7 +20,11 @@ const MovieCard = props => {
   };
 
   return (
-    <TouchableOpacity activeOpacity={0.9} onPress={() => {}}>
+    <TouchableOpacity
+      activeOpacity={0.9}
+      onPress={() => {
+        navigation.navigate('Movie', {movieId});
+      }}>
       <View
         style={{...styles.cardWrapper, backgroundColor: bkgStyle.secBkgColor}}>
         <View style={styles.image}>
