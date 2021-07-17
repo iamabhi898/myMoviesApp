@@ -1,10 +1,12 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from '../screens/HomeScreen';
 import AboutScreen from '../screens/AboutScreen';
 import ViewMoreScreen from '../screens/ViewMoreScreen';
+import MovieScreen from '../screens/MovieScreen';
+import MovieHeaderIcons from '../components/MovieHeaderIcons';
 
 const Stack = createStackNavigator();
 
@@ -44,7 +46,6 @@ const HomeStackNavigator = props => {
             color: bkgStyle.secTxtColor,
           },
         }}
-        headerShown={false}
         children={() => (
           <AboutScreen bkgStyle={bkgStyle} isDarkMode={isDarkMode} />
         )}
@@ -67,13 +68,36 @@ const HomeStackNavigator = props => {
             },
           };
         }}
-        headerShown={false}
         children={({navigation, route}) => (
           <ViewMoreScreen
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
             navigation={navigation}
             route={route}
+          />
+        )}
+      />
+      <Stack.Screen
+        name="Movie"
+        options={{
+          headerTitle: false,
+          headerTintColor: bkgStyle.secTxtColor,
+          headerStyle: {
+            backgroundColor: bkgStyle.bkgColor,
+            borderBottomWidth: 1,
+            borderBottomColor: 'gray',
+          },
+          headerRightContainerStyle: {
+            marginRight: 20,
+          },
+          headerRight: () => <MovieHeaderIcons />,
+        }}
+        children={({navigation, route}) => (
+          <MovieScreen
+            bkgStyle={bkgStyle}
+            isDarkMode={isDarkMode}
+            navigation={navigation}
+            movieId={route.params.movieId}
           />
         )}
       />

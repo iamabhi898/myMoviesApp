@@ -92,6 +92,7 @@ const SearchScreen = props => {
         rating={item.vote_average}
         poster={item.poster_path}
         bkgStyle={bkgStyle}
+        navigation={navigation}
       />
     );
   };
