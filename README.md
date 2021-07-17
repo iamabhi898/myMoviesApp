@@ -24,6 +24,7 @@ This is a Movies app for searching and discovering movies, this app allows you t
 - react-native-vector-icons - Ionicons Icons
 - react-native-dotenv - API_KEY
 - react-native-popup-menu - Popup Menu
+- react-native-linear-gradient 
 - Git Version Control
 - [TMDb](https://www.themoviedb.org/) API (The Movie Datebase)
 
