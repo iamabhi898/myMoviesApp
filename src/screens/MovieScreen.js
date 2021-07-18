@@ -9,8 +9,12 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import 'intl'; // USD conversion
+import 'intl/locale-data/jsonp/en';
 
 import config from '../../config';
+import CastSection from '../components/CastSection';
+import SimilarMoviesSection from '../components/SimilarMoviesSection';
 
 const MovieScreen = props => {
   const {bkgStyle, isDarkMode, navigation, movieId} = props;
@@ -83,11 +87,30 @@ const MovieScreen = props => {
     return result.slice(0, -2);
   };
 
+  const getOriginalLanguage = (lanCode, spokenLan) => {
+    let lan = '';
+    spokenLan.forEach(item => {
+      if (item.iso_639_1 === lanCode) {
+        lan += item.english_name;
+      }
+    });
+    if (lan.length !== 0) {
+      return lan;
+    } else {
+      return '      -';
+    }
+  };
+
+  let formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+
   return (
     <View style={{...styles.screen, backgroundColor: bkgStyle.bkgColor}}>
       {movieState ? (
         <ScrollView
-          contentContainerStyle={{paddingBottom: 100}}
+          contentContainerStyle={{paddingBottom: 90}}
           style={styles.container}>
           {/* Movie Poster */}
           <View
@@ -241,6 +264,115 @@ const MovieScreen = props => {
               {movieState.overview}
             </Text>
           </View>
+          {/* Cast Section */}
+          <CastSection
+            movieId={movieId}
+            bkgStyle={bkgStyle}
+            navigation={navigation}
+          />
+          {/* Similar Movies */}
+          <SimilarMoviesSection
+            movieId={movieId}
+            bkgStyle={bkgStyle}
+            navigation={navigation}
+          />
+          {/* details - footer */}
+          <View style={styles.footerDetails}>
+            <View style={styles.footerChildren}>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-SemiBold',
+                }}>
+                Original Title
+              </Text>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-Regular',
+                  fontSize: 13,
+                }}>
+                {movieState.original_title
+                  ? movieState.original_title
+                  : '      -'}
+              </Text>
+            </View>
+            <View style={styles.footerChildren}>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-SemiBold',
+                }}>
+                Status
+              </Text>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-Regular',
+                  fontSize: 13,
+                }}>
+                {movieState.status ? movieState.status : '      -'}
+              </Text>
+            </View>
+            <View style={styles.footerChildren}>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-SemiBold',
+                }}>
+                Original Language
+              </Text>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-Regular',
+                  fontSize: 13,
+                }}>
+                {getOriginalLanguage(
+                  movieState.original_language,
+                  movieState.spoken_languages,
+                )}
+              </Text>
+            </View>
+            <View style={styles.footerChildren}>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-SemiBold',
+                }}>
+                Budget
+              </Text>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-Regular',
+                  fontSize: 13,
+                }}>
+                {movieState.status === 'Released' && movieState.budget !== 0
+                  ? formatter.format(movieState.budget)
+                  : '      -'}
+              </Text>
+            </View>
+            <View style={styles.footerChildren}>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-SemiBold',
+                }}>
+                Revenue
+              </Text>
+              <Text
+                style={{
+                  color: bkgStyle.txtColor,
+                  fontFamily: 'OpenSans-Regular',
+                  fontSize: 13,
+                }}>
+                {movieState.status === 'Released' && movieState.revenue !== 0
+                  ? formatter.format(movieState.revenue)
+                  : '      -'}
+              </Text>
+            </View>
+          </View>
         </ScrollView>
       ) : (
         <Text
@@ -344,6 +476,14 @@ const styles = StyleSheet.create({
   detailsTxt: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 14,
+  },
+  footerDetails: {
+    marginTop: 10,
+    width: '90%',
+    alignSelf: 'center',
+  },
+  footerChildren: {
+    marginVertical: 5,
   },
 });
 

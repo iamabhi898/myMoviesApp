@@ -1,35 +1,21 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 
-const MovieCard = props => {
-  const {movieId, title, rating, poster, bkgStyle, navigation} = props;
-  const [moviePoster, setMoviePoster] = React.useState(null);
+const CastCard = props => {
+  const {castId, name, profilePic, character, bkgStyle, navigation} = props;
+  const [profileImage, setProfileImage] = React.useState(null);
 
   React.useEffect(() => {
-    setMoviePoster(`http://image.tmdb.org/t/p/w300/${poster}`);
+    setProfileImage(`http://image.tmdb.org/t/p/w200/${profilePic}`);
   }, []);
 
-  const getRatingTxtColor = rating => {
-    if (rating >= 6.5) {
-      return '#03fc3d';
-    } else if (rating >= 4 && rating < 6.5) {
-      return 'yellow';
-    } else if (rating < 4) {
-      return '#fc3d03';
-    }
-  };
-
   return (
-    <TouchableOpacity
-      activeOpacity={0.9}
-      onPress={() => {
-        navigation.navigate('Movie', {movieId});
-      }}>
+    <TouchableOpacity activeOpacity={0.9} onPress={() => {}}>
       <View
         style={{...styles.cardWrapper, backgroundColor: bkgStyle.secBkgColor}}>
         <View style={styles.image}>
           <Image
-            source={{uri: moviePoster}}
+            source={{uri: profileImage}}
             style={{
               position: 'absolute',
               width: '100%',
@@ -40,21 +26,11 @@ const MovieCard = props => {
         <View
           style={{...styles.details, backgroundColor: bkgStyle.cardBlurBkg}}>
           <Text style={{...styles.titleTxt}} numberOfLines={2}>
-            {title}
+            {name}
           </Text>
-          {rating === 0 ? null : (
-            <View
-              style={{
-                ...styles.ratingWrapper,
-                borderColor: getRatingTxtColor(rating),
-                backgroundColor: bkgStyle.cardBlurBkg,
-              }}>
-              <Text style={{...styles.titleTxt, color: 'white'}}>
-                {Math.floor(rating * 10)}
-                <Text style={{fontSize: 8}}>%</Text>
-              </Text>
-            </View>
-          )}
+          <Text style={{...styles.detailTxt}} numberOfLines={2}>
+            {character}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -65,7 +41,7 @@ const styles = StyleSheet.create({
   cardWrapper: {
     flex: 1,
     width: 160,
-    height: 260,
+    height: 200,
     marginBottom: 10,
     borderRadius: 10,
     overflow: 'hidden',
@@ -94,22 +70,16 @@ const styles = StyleSheet.create({
     width: '100%',
     bottom: 0,
   },
-  ratingWrapper: {
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
-    right: 6,
-    top: -25,
-    height: 34,
-    width: 34,
-    borderRadius: 17,
-    borderWidth: 1.4,
-  },
   titleTxt: {
     fontSize: 13,
     color: 'white',
     fontFamily: 'Roboto-Bold',
   },
+  detailTxt: {
+    fontSize: 12,
+    color: 'white',
+    fontFamily: 'Roboto-Light',
+  },
 });
 
-export default MovieCard;
+export default CastCard;
