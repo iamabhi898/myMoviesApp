@@ -66,7 +66,9 @@ const styles = StyleSheet.create({
   details: {
     position: 'absolute',
     justifyContent: 'center',
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    paddingTop: 0,
     width: '100%',
     bottom: 0,
   },

@@ -21,6 +21,7 @@ const MovieScreen = props => {
   const [movieState, setMovieState] = React.useState(null);
   const [moviePoster, setMoviePoster] = React.useState(null);
   const [movieBackdrop, setMovieBackdrop] = React.useState(null);
+  const [showMoreTxt, setShowMoreTxt] = React.useState(false);
 
   const fetchMovie = async movieId => {
     let url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${config.API_KEY}&language=en-US`;
@@ -99,6 +100,10 @@ const MovieScreen = props => {
     } else {
       return '      -';
     }
+  };
+
+  const toggleShowMoreTxt = () => {
+    setShowMoreTxt(!showMoreTxt);
   };
 
   let formatter = new Intl.NumberFormat('en-US', {
@@ -256,12 +261,22 @@ const MovieScreen = props => {
               Overview
             </Text>
             <Text
+              numberOfLines={showMoreTxt ? undefined : 6}
               style={{
                 color: bkgStyle.txtColor,
                 fontFamily: 'OpenSans-Regular',
                 fontSize: 13,
               }}>
               {movieState.overview}
+            </Text>
+            <Text
+              onPress={toggleShowMoreTxt}
+              style={{
+                lineHeight: 24,
+                color: '#777',
+                fontFamily: 'OpenSans-SemiBold',
+              }}>
+              {showMoreTxt ? 'Read less' : 'Read more...'}
             </Text>
           </View>
           {/* Cast Section */}
