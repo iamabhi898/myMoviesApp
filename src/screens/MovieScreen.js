@@ -22,6 +22,7 @@ const MovieScreen = props => {
   const [moviePoster, setMoviePoster] = React.useState(null);
   const [movieBackdrop, setMovieBackdrop] = React.useState(null);
   const [showMoreTxt, setShowMoreTxt] = React.useState(false);
+  const [lengthMore, setLengthMore] = React.useState(false);
 
   const fetchMovie = async movieId => {
     let url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${config.API_KEY}&language=en-US`;
@@ -105,6 +106,10 @@ const MovieScreen = props => {
   const toggleShowMoreTxt = () => {
     setShowMoreTxt(!showMoreTxt);
   };
+
+  const onTextLayout = React.useCallback(e => {
+    setLengthMore(e.nativeEvent.lines.length > 6);
+  }, []);
 
   let formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -261,6 +266,7 @@ const MovieScreen = props => {
               Overview
             </Text>
             <Text
+              onTextLayout={onTextLayout}
               numberOfLines={showMoreTxt ? undefined : 6}
               style={{
                 color: bkgStyle.txtColor,
@@ -269,15 +275,17 @@ const MovieScreen = props => {
               }}>
               {movieState.overview}
             </Text>
-            <Text
-              onPress={toggleShowMoreTxt}
-              style={{
-                lineHeight: 24,
-                color: '#777',
-                fontFamily: 'OpenSans-SemiBold',
-              }}>
-              {showMoreTxt ? 'Read less' : 'Read more...'}
-            </Text>
+            {lengthMore ? (
+              <Text
+                onPress={toggleShowMoreTxt}
+                style={{
+                  lineHeight: 24,
+                  color: '#777',
+                  fontFamily: 'OpenSans-SemiBold',
+                }}>
+                {showMoreTxt ? 'Read less' : 'Read more...'}
+              </Text>
+            ) : null}
           </View>
           {/* Cast Section */}
           <CastSection
