@@ -10,7 +10,11 @@ const CastCard = props => {
   }, []);
 
   return (
-    <TouchableOpacity activeOpacity={0.9} onPress={() => {}}>
+    <TouchableOpacity
+      activeOpacity={0.9}
+      onPress={() => {
+        navigation.push('Cast', {castId, profilePic});
+      }}>
       <View
         style={{...styles.cardWrapper, backgroundColor: bkgStyle.secBkgColor}}>
         <View style={styles.image}>

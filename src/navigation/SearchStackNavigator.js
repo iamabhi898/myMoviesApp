@@ -6,6 +6,7 @@ import SearchScreen from '../screens/SearchScreen';
 import DiscoverScreen from '../screens/DiscoverScreen';
 import MovieScreen from '../screens/MovieScreen';
 import MovieHeaderIcons from '../components/MovieHeaderIcons';
+import CastScreen from '../screens/CastScreen';
 
 const Stack = createStackNavigator();
 
@@ -72,6 +73,30 @@ const SearchStackNavigator = props => {
             isDarkMode={isDarkMode}
             navigation={navigation}
             movieId={route.params.movieId}
+          />
+        )}
+      />
+      <Stack.Screen
+        name="Cast"
+        options={{
+          headerTitle: false,
+          headerTintColor: bkgStyle.secTxtColor,
+          headerStyle: {
+            backgroundColor: bkgStyle.bkgColor,
+            borderBottomWidth: 1,
+            borderBottomColor: 'gray',
+          },
+          headerRightContainerStyle: {
+            marginRight: 20,
+          },
+        }}
+        children={({navigation, route}) => (
+          <CastScreen
+            bkgStyle={bkgStyle}
+            isDarkMode={isDarkMode}
+            navigation={navigation}
+            castId={route.params.castId}
+            profilePic={route.params.profilePic}
           />
         )}
       />
