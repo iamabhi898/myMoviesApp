@@ -3,6 +3,7 @@ import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import config from '../../config';
+import CastKnownForMovies from '../components/CastKnowForMovies';
 
 const CastScreen = props => {
   const {castId, profilePic, bkgStyle, isDarkMode, navigation} = props;
@@ -83,19 +84,23 @@ const CastScreen = props => {
                 Known For
               </Text>
               <Text style={{...styles.detailTxt, color: bkgStyle.txtColor}}>
-                {castDetails.known_for_department}
+                {castDetails.known_for_department
+                  ? castDetails.known_for_department
+                  : '      -'}
               </Text>
               <Text style={{...styles.subTitleTxt, color: bkgStyle.txtColor}}>
                 Birthdate
               </Text>
               <Text style={{...styles.detailTxt, color: bkgStyle.txtColor}}>
-                {castDetails.birthday}
+                {castDetails.birthday ? castDetails.birthday : '      -'}
               </Text>
               <Text style={{...styles.subTitleTxt, color: bkgStyle.txtColor}}>
                 Place of Birth
               </Text>
               <Text style={{...styles.detailTxt, color: bkgStyle.txtColor}}>
-                {castDetails.place_of_birth}
+                {castDetails.place_of_birth
+                  ? castDetails.place_of_birth
+                  : '      -'}
               </Text>
             </View>
             <View style={{...styles.Biography, color: bkgStyle.txtColor}}>
@@ -110,7 +115,7 @@ const CastScreen = props => {
                   color: bkgStyle.txtColor,
                   marginBottom: 0,
                 }}>
-                {castDetails.biography}
+                {castDetails.biography ? castDetails.biography : '      -'}
               </Text>
               {lengthMore ? (
                 <Text
@@ -125,6 +130,12 @@ const CastScreen = props => {
               ) : null}
             </View>
           </View>
+          {/* Known For */}
+          <CastKnownForMovies
+            castId={castId}
+            bkgStyle={bkgStyle}
+            navigation={navigation}
+          />
         </ScrollView>
       ) : (
         <Text
