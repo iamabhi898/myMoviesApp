@@ -8,6 +8,7 @@ import ViewMoreScreen from '../screens/ViewMoreScreen';
 import MovieScreen from '../screens/MovieScreen';
 import MovieHeaderIcons from '../components/MovieHeaderIcons';
 import CastScreen from '../screens/CastScreen';
+import CastMoviesScreen from '../screens/CastMoviesScreen';
 
 const Stack = createStackNavigator();
 
@@ -123,6 +124,32 @@ const HomeStackNavigator = props => {
             navigation={navigation}
             castId={route.params.castId}
             profilePic={route.params.profilePic}
+          />
+        )}
+      />
+      <Stack.Screen
+        name="CastMovies"
+        options={{
+          headerTitle: false,
+          headerTintColor: bkgStyle.secTxtColor,
+          headerStyle: {
+            backgroundColor: bkgStyle.bkgColor,
+            borderBottomWidth: 1,
+            borderBottomColor: 'gray',
+          },
+          headerTitleStyle: {
+            fontFamily: 'Montserrat-SemiBold',
+            fontSize: 18,
+            color: bkgStyle.secTxtColor,
+          },
+        }}
+        children={({navigation, route}) => (
+          <CastMoviesScreen
+            castId={route.params.castId}
+            castName={route.params.castName}
+            bkgStyle={bkgStyle}
+            isDarkMode={isDarkMode}
+            navigation={navigation}
           />
         )}
       />

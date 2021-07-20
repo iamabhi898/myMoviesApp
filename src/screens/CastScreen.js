@@ -1,9 +1,17 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  Button,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import config from '../../config';
-import CastKnownForMovies from '../components/CastKnowForMovies';
+import CastKnownForMovies from '../components/CastKnownForMovies';
 
 const CastScreen = props => {
   const {castId, profilePic, bkgStyle, isDarkMode, navigation} = props;
@@ -136,6 +144,26 @@ const CastScreen = props => {
             bkgStyle={bkgStyle}
             navigation={navigation}
           />
+          {/* Show All Movies */}
+          <TouchableOpacity
+            style={{alignSelf: 'center'}}
+            activeOpacity={0.7}
+            onPress={() => {
+              navigation.push('CastMovies', {
+                castId,
+                castName: castDetails.name ? castDetails.name : null,
+              });
+            }}>
+            <Text
+              style={{
+                lineHeight: 24,
+                color: '#777',
+                fontFamily: 'OpenSans-SemiBold',
+                fontSize: 15,
+              }}>
+              Show All Movies
+            </Text>
+          </TouchableOpacity>
         </ScrollView>
       ) : (
         <Text
