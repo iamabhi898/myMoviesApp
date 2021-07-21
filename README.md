@@ -1,6 +1,6 @@
 # My Movies
 
-<img src="https://user-images.githubusercontent.com/59258140/125776825-205751aa-b49a-47c1-b4e7-614a26d2b0f3.jpg" alt="home" width="600px">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/59258140/125934676-ed44f845-78c0-4ab2-b0f2-9b394f243d09.jpg" alt="search" width="600px">
+<img src="https://user-images.githubusercontent.com/59258140/125776825-205751aa-b49a-47c1-b4e7-614a26d2b0f3.jpg" alt="home" width="600px">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/59258140/125934676-ed44f845-78c0-4ab2-b0f2-9b394f243d09.jpg" alt="search" width="600px">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/59258140/126485554-aa1ab338-5038-4e2b-9e3c-2c8abaa46cc2.jpg" alt="movie&cast" width="600px">
 
 > A Movies App that allows you to search and discover movies to save them to your watchlist or your favourites.
 
@@ -24,7 +24,7 @@ This is a Movies app for searching and discovering movies, this app allows you t
 - react-native-vector-icons - Ionicons Icons
 - react-native-dotenv - API_KEY
 - react-native-popup-menu - Popup Menu
-- react-native-linear-gradient 
+- react-native-linear-gradient
 - Git Version Control
 - [TMDb](https://www.themoviedb.org/) API (The Movie Datebase)
 
