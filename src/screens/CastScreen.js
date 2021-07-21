@@ -3,7 +3,7 @@ import {
   View,
   Text,
   Image,
-  Button,
+  Linking,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
@@ -17,6 +17,7 @@ const CastScreen = props => {
   const {castId, profilePic, bkgStyle, isDarkMode, navigation} = props;
   const [profileImage, setProfileImage] = React.useState(null);
   const [castDetails, setCastDetails] = React.useState(null);
+  const [castExternalId, setExternalId] = React.useState(null);
   const [showMoreTxt, setShowMoreTxt] = React.useState(false);
   const [lengthMore, setLengthMore] = React.useState(false);
 
@@ -36,9 +37,26 @@ const CastScreen = props => {
     }
   };
 
+  const fetchExternalId = async castId => {
+    let url = `https://api.themoviedb.org/3/person/${castId}/external_ids?api_key=${config.API_KEY}&language=en-US`;
+    try {
+      await fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          setExternalId(data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   React.useEffect(() => {
     setProfileImage(`http://image.tmdb.org/t/p/w300/${profilePic}`);
     fetchDetails(castId);
+    fetchExternalId(castId);
   }, []);
 
   const toggleShowMoreTxt = () => {
@@ -64,23 +82,51 @@ const CastScreen = props => {
             <Text style={{...styles.nameTxt, color: bkgStyle.txtColor}}>
               {castDetails.name}
             </Text>
-            <View style={styles.socialMediaWrapper}>
-              <Ionicons
-                name="logo-facebook"
-                color={bkgStyle.txtColor}
-                size={28}
-              />
-              <Ionicons
-                name="logo-twitter"
-                color={bkgStyle.txtColor}
-                size={28}
-              />
-              <Ionicons
-                name="logo-instagram"
-                color={bkgStyle.txtColor}
-                size={28}
-              />
-            </View>
+            {castExternalId !== null ? (
+              <View style={styles.socialMediaWrapper}>
+                {castExternalId.facebook_id !== null &&
+                castExternalId.facebook_id !== '' ? (
+                  <Ionicons
+                    name="logo-facebook"
+                    color={bkgStyle.txtColor}
+                    size={28}
+                    style={{marginRight: 20}}
+                    onPress={async () => {
+                      await Linking.openURL(
+                        `https://www.facebook.com/${castExternalId.facebook_id}`,
+                      );
+                    }}
+                  />
+                ) : null}
+                {castExternalId.twitter_id !== null &&
+                castExternalId.twitter_id !== '' ? (
+                  <Ionicons
+                    name="logo-twitter"
+                    color={bkgStyle.txtColor}
+                    size={28}
+                    style={{marginRight: 20}}
+                    onPress={async () => {
+                      await Linking.openURL(
+                        `https://www.twitter.com/${castExternalId.twitter_id}`,
+                      );
+                    }}
+                  />
+                ) : null}
+                {castExternalId.instagram_id !== null &&
+                castExternalId.instagram_id !== '' ? (
+                  <Ionicons
+                    name="logo-instagram"
+                    color={bkgStyle.txtColor}
+                    size={28}
+                    onPress={async () => {
+                      await Linking.openURL(
+                        `https://www.instagram.com/${castExternalId.instagram_id}`,
+                      );
+                    }}
+                  />
+                ) : null}
+              </View>
+            ) : null}
           </View>
           {/* Personal Info & Biography */}
           <View style={styles.detailsWrapper}>
@@ -210,8 +256,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   socialMediaWrapper: {
-    width: 110,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     flexDirection: 'row',
   },
   detailsWrapper: {
@@ -243,5 +288,8 @@ TMDb API calls =>
 
 for details: 
 `https://api.themoviedb.org/3/person/${castId}?api_key=${config.API_KEY}&language=en-US`
+
+for external id: 
+`https://api.themoviedb.org/3/person/${castId}/external_ids?api_key=${config.API_KEY}&language=en-US`
 
 */
