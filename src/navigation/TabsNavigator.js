@@ -3,10 +3,10 @@ import {StyleSheet, Keyboard} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import WatchListScreen from '../screens/WatchListScreen';
-import FavouritesScreen from '../screens/FavouritesScreen';
 import HomeStackNavigator from './HomeStackNavigator';
 import SearchStackNavigator from './SearchStackNavigator';
+import WatchListStackNavigator from './WatchListStackNavigator';
+import FavouritesStackNavigator from './FavouritesStackNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -67,24 +67,34 @@ const TabsNavigator = props => {
         )}
       />
       <Tab.Screen
-        name="WatchList"
+        name="WatchListStack"
         options={{
           tabBarIcon: ({color, focused}) => {
             let iconName = focused ? 'bookmarks' : 'bookmarks-outline';
             return <Ionicons name={iconName} color={color} size={26} />;
           },
         }}
-        children={() => <WatchListScreen bkgStyle={bkgStyle} />}
+        children={() => (
+          <WatchListStackNavigator
+            bkgStyle={bkgStyle}
+            isDarkMode={isDarkMode}
+          />
+        )}
       />
       <Tab.Screen
-        name="Favourites"
+        name="FavouritesStack"
         options={{
           tabBarIcon: ({color, focused}) => {
             let iconName = focused ? 'heart' : 'heart-outline';
             return <Ionicons name={iconName} color={color} size={28} />;
           },
         }}
-        children={() => <FavouritesScreen bkgStyle={bkgStyle} />}
+        children={() => (
+          <FavouritesStackNavigator
+            bkgStyle={bkgStyle}
+            isDarkMode={isDarkMode}
+          />
+        )}
       />
     </Tab.Navigator>
   );
