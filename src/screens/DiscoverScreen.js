@@ -142,7 +142,8 @@ const DiscoverScreen = props => {
   return (
     <View style={{...styles.screen, backgroundColor: bkgStyle.bkgColor}}>
       <ScrollView
-        style={{width: '90%', paddingBottom: 100}}
+        contentContainerStyle={{paddingBottom: 150}}
+        style={{width: '90%'}}
         showsVerticalScrollIndicator={false}>
         <View style={styles.titleWrapper}>
           <Ionicons name="search-circle" size={35} color={bkgStyle.txtColor} />
@@ -203,7 +204,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: '100%',
-    marginBottom: 30,
+    marginBottom: 10,
   },
   searchButton: {
     alignSelf: 'center',

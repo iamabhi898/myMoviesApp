@@ -5,6 +5,7 @@ import {
   Image,
   ScrollView,
   StyleSheet,
+  Linking,
   TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -21,6 +22,7 @@ const MovieScreen = props => {
   const [movieState, setMovieState] = React.useState(null);
   const [moviePoster, setMoviePoster] = React.useState(null);
   const [movieBackdrop, setMovieBackdrop] = React.useState(null);
+  const [trailerKey, setTrailerKey] = React.useState(null);
   const [showMoreTxt, setShowMoreTxt] = React.useState(false);
   const [lengthMore, setLengthMore] = React.useState(false);
 
@@ -40,8 +42,32 @@ const MovieScreen = props => {
     }
   };
 
+  const fetchTrailer = async movieId => {
+    let url = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${config.API_KEY}&language=en-US`;
+    try {
+      await fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const results = data.results;
+          results.forEach(item => {
+            if (item.type === 'Trailer') {
+              console.log(item.key);
+              setTrailerKey(item.key);
+              return;
+            }
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   React.useEffect(() => {
     fetchMovie(movieId);
+    fetchTrailer(movieId);
   }, []);
 
   React.useEffect(() => {
@@ -203,24 +229,30 @@ const MovieScreen = props => {
                 User Score
               </Text>
             </View>
-            <View style={styles.verticalBorder}></View>
-            <TouchableOpacity
-              activeOpacity={0.6}
-              style={{paddingVertical: 5}}
-              onPress={() => {}}>
-              <View style={styles.trailerContainer}>
-                <Ionicons name="play" color={bkgStyle.txtColor} size={20} />
-                <Text
-                  style={{
-                    color: bkgStyle.txtColor,
-                    fontFamily: 'OpenSans-Regular',
-                    fontSize: 14,
-                  }}>
-                  {' '}
-                  Play Trailer
-                </Text>
-              </View>
-            </TouchableOpacity>
+            {trailerKey ? <View style={styles.verticalBorder}></View> : null}
+            {trailerKey ? (
+              <TouchableOpacity
+                activeOpacity={0.6}
+                style={{paddingVertical: 5}}
+                onPress={async () => {
+                  await Linking.openURL(
+                    `https://www.youtube.com/watch?v=${trailerKey}`,
+                  );
+                }}>
+                <View style={styles.trailerContainer}>
+                  <Ionicons name="play" color={bkgStyle.txtColor} size={20} />
+                  <Text
+                    style={{
+                      color: bkgStyle.txtColor,
+                      fontFamily: 'OpenSans-Regular',
+                      fontSize: 14,
+                    }}>
+                    {' '}
+                    Play Trailer
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ) : null}
           </View>
           {/* Release Date, Runtime & Genres */}
           <View
@@ -517,5 +549,13 @@ export default MovieScreen;
 TMDb api call for finding movie by id: 
 
 `https://api.themoviedb.org/3/movie/${movieId}?api_key=${config.API_KEY}&language=en-US`
+
+TMDb api call for trailers by movieId: 
+
+`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${config.API_KEY}&language=en-US`
+
+youtube trailer link: 
+
+`https://www.youtube.com/watch?v=${trailerKey}`
 
 */
