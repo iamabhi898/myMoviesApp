@@ -11,7 +11,18 @@ import FavouritesStackNavigator from './FavouritesStackNavigator';
 const Tab = createBottomTabNavigator();
 
 const TabsNavigator = props => {
-  const {bkgStyle, isDarkMode, setIsDarkMode, moviesState} = props;
+  const {
+    bkgStyle,
+    isDarkMode,
+    setIsDarkMode,
+    moviesState,
+    handleAddWatchList,
+    handleAddFavourites,
+    handleRemoveWatchList,
+    handleRemoveFavourites,
+    watchListState,
+    favouritesState,
+  } = props;
   const [isKeyboardShown, setIsKeyboardShown] = React.useState(false);
 
   React.useEffect(() => {
@@ -51,6 +62,12 @@ const TabsNavigator = props => {
             isDarkMode={isDarkMode}
             setIsDarkMode={setIsDarkMode}
             moviesState={moviesState}
+            handleAddWatchList={handleAddWatchList}
+            handleAddFavourites={handleAddFavourites}
+            handleRemoveWatchList={handleRemoveWatchList}
+            handleRemoveFavourites={handleRemoveFavourites}
+            watchListState={watchListState}
+            favouritesState={favouritesState}
           />
         )}
       />
@@ -63,7 +80,16 @@ const TabsNavigator = props => {
           },
         }}
         children={() => (
-          <SearchStackNavigator bkgStyle={bkgStyle} isDarkMode={isDarkMode} />
+          <SearchStackNavigator
+            bkgStyle={bkgStyle}
+            isDarkMode={isDarkMode}
+            handleAddWatchList={handleAddWatchList}
+            handleAddFavourites={handleAddFavourites}
+            handleRemoveWatchList={handleRemoveWatchList}
+            handleRemoveFavourites={handleRemoveFavourites}
+            watchListState={watchListState}
+            favouritesState={favouritesState}
+          />
         )}
       />
       <Tab.Screen
@@ -78,6 +104,12 @@ const TabsNavigator = props => {
           <WatchListStackNavigator
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
+            handleAddWatchList={handleAddWatchList}
+            handleAddFavourites={handleAddFavourites}
+            handleRemoveWatchList={handleRemoveWatchList}
+            handleRemoveFavourites={handleRemoveFavourites}
+            watchListState={watchListState}
+            favouritesState={favouritesState}
           />
         )}
       />
@@ -93,6 +125,12 @@ const TabsNavigator = props => {
           <FavouritesStackNavigator
             bkgStyle={bkgStyle}
             isDarkMode={isDarkMode}
+            handleAddWatchList={handleAddWatchList}
+            handleAddFavourites={handleAddFavourites}
+            handleRemoveWatchList={handleRemoveWatchList}
+            handleRemoveFavourites={handleRemoveFavourites}
+            watchListState={watchListState}
+            favouritesState={favouritesState}
           />
         )}
       />

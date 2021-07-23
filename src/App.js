@@ -24,12 +24,36 @@ const App = () => {
       : ['#EBEBEB00', '#EBEBEB'],
   };
 
+  // state handling
   const [moviesState, setMoviesState] = React.useState({
     trending: [],
     upcoming: [],
     popular: [],
     topRated: [],
   });
+
+  const [watchListState, setWatchListState] = React.useState([]);
+  const [favouritesState, setFavouritesState] = React.useState([]);
+
+  const handleAddWatchList = movieId => {
+    setWatchListState(state => {
+      return [...state, movieId];
+    });
+  };
+
+  const handleAddFavourites = movieId => {
+    setFavouritesState(state => {
+      return [...state, movieId];
+    });
+  };
+
+  const handleRemoveWatchList = movieId => {
+    setWatchListState(state => state.filter(item => item !== movieId));
+  };
+
+  const handleRemoveFavourites = movieId => {
+    setFavouritesState(state => state.filter(item => item !== movieId));
+  };
 
   // TMDb API
   const fetchMovies = async (setMoviesState, category) => {
@@ -93,6 +117,12 @@ const App = () => {
         isDarkMode={isDarkMode}
         setIsDarkMode={setIsDarkMode}
         moviesState={moviesState}
+        handleAddWatchList={handleAddWatchList}
+        handleAddFavourites={handleAddFavourites}
+        handleRemoveWatchList={handleRemoveWatchList}
+        handleRemoveFavourites={handleRemoveFavourites}
+        watchListState={watchListState}
+        favouritesState={favouritesState}
       />
     </NavigationContainer>
   );

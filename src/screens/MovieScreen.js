@@ -51,7 +51,6 @@ const MovieScreen = props => {
           const results = data.results;
           results.forEach(item => {
             if (item.type === 'Trailer') {
-              console.log(item.key);
               setTrailerKey(item.key);
               return;
             }

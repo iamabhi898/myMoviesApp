@@ -11,26 +11,48 @@ import CastMoviesScreen from '../screens/CastMoviesScreen';
 const Stack = createStackNavigator();
 
 const WatchListStackNavigator = props => {
-  const {bkgStyle, isDarkMode} = props;
+  const {
+    bkgStyle,
+    isDarkMode,
+    handleAddWatchList,
+    handleAddFavourites,
+    handleRemoveWatchList,
+    handleRemoveFavourites,
+    watchListState,
+    favouritesState,
+  } = props;
 
   return (
     <Stack.Navigator initialRouteName="WatchList">
       <Stack.Screen
         name="WatchList"
         options={{
-          headerShown: false,
+          title: 'My WatchList',
+          headerTintColor: bkgStyle.secTxtColor,
+          headerStyle: {
+            backgroundColor: bkgStyle.bkgColor,
+            borderBottomWidth: 1,
+            borderBottomColor: 'gray',
+          },
+          headerTitleStyle: {
+            fontFamily: 'Montserrat-SemiBold',
+            fontSize: 18,
+            color: bkgStyle.secTxtColor,
+            marginLeft: 10,
+          },
         }}
         children={({navigation, route}) => (
           <WatchListScreen
             bkgStyle={bkgStyle}
             navigation={navigation}
             route={route}
+            watchListState={watchListState}
           />
         )}
       />
       <Stack.Screen
         name="Movie"
-        options={{
+        options={({route}) => ({
           headerTitle: false,
           headerTintColor: bkgStyle.secTxtColor,
           headerStyle: {
@@ -41,8 +63,18 @@ const WatchListStackNavigator = props => {
           headerRightContainerStyle: {
             marginRight: 20,
           },
-          headerRight: () => <MovieHeaderIcons />,
-        }}
+          headerRight: () => (
+            <MovieHeaderIcons
+              movieId={route.params.movieId}
+              handleAddWatchList={handleAddWatchList}
+              handleAddFavourites={handleAddFavourites}
+              handleRemoveWatchList={handleRemoveWatchList}
+              handleRemoveFavourites={handleRemoveFavourites}
+              watchListState={watchListState}
+              favouritesState={favouritesState}
+            />
+          ),
+        })}
         children={({navigation, route}) => (
           <MovieScreen
             bkgStyle={bkgStyle}

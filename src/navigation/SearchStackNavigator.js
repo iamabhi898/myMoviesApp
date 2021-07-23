@@ -12,7 +12,16 @@ import CastMoviesScreen from '../screens/CastMoviesScreen';
 const Stack = createStackNavigator();
 
 const SearchStackNavigator = props => {
-  const {bkgStyle, isDarkMode} = props;
+  const {
+    bkgStyle,
+    isDarkMode,
+    handleAddWatchList,
+    handleAddFavourites,
+    handleRemoveWatchList,
+    handleRemoveFavourites,
+    watchListState,
+    favouritesState,
+  } = props;
 
   return (
     <Stack.Navigator initialRouteName="Search">
@@ -55,7 +64,7 @@ const SearchStackNavigator = props => {
       />
       <Stack.Screen
         name="Movie"
-        options={{
+        options={({route}) => ({
           headerTitle: false,
           headerTintColor: bkgStyle.secTxtColor,
           headerStyle: {
@@ -66,8 +75,18 @@ const SearchStackNavigator = props => {
           headerRightContainerStyle: {
             marginRight: 20,
           },
-          headerRight: () => <MovieHeaderIcons />,
-        }}
+          headerRight: () => (
+            <MovieHeaderIcons
+              movieId={route.params.movieId}
+              handleAddWatchList={handleAddWatchList}
+              handleAddFavourites={handleAddFavourites}
+              handleRemoveWatchList={handleRemoveWatchList}
+              handleRemoveFavourites={handleRemoveFavourites}
+              watchListState={watchListState}
+              favouritesState={favouritesState}
+            />
+          ),
+        })}
         children={({navigation, route}) => (
           <MovieScreen
             bkgStyle={bkgStyle}
