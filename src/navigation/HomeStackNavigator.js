@@ -24,6 +24,7 @@ const HomeStackNavigator = props => {
     handleRemoveFavourites,
     watchListState,
     favouritesState,
+    onSetTheme,
   } = props;
 
   return (
@@ -40,6 +41,7 @@ const HomeStackNavigator = props => {
             setIsDarkMode={setIsDarkMode}
             moviesState={moviesState}
             navigation={navigation}
+            onSetTheme={onSetTheme}
           />
         )}
       />

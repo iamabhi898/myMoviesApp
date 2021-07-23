@@ -16,7 +16,14 @@ import PopularSection from '../components/PopularSection';
 import TopRatedSection from '../components/TopRatedSection';
 
 const HomeScreen = props => {
-  const {navigation, bkgStyle, isDarkMode, setIsDarkMode, moviesState} = props;
+  const {
+    navigation,
+    bkgStyle,
+    isDarkMode,
+    setIsDarkMode,
+    moviesState,
+    onSetTheme,
+  } = props;
 
   const DropDownMenu = () => {
     return (
@@ -32,7 +39,7 @@ const HomeScreen = props => {
         <MenuOptions style={{backgroundColor: bkgStyle.secBkgColor}}>
           <MenuOption
             onSelect={() => {
-              setIsDarkMode(!isDarkMode);
+              onSetTheme(!isDarkMode);
             }}>
             <View style={styles.menuPopupLine}>
               <Ionicons

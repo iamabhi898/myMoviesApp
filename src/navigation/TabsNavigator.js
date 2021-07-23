@@ -22,6 +22,7 @@ const TabsNavigator = props => {
     handleRemoveFavourites,
     watchListState,
     favouritesState,
+    onSetTheme,
   } = props;
   const [isKeyboardShown, setIsKeyboardShown] = React.useState(false);
 
@@ -68,6 +69,7 @@ const TabsNavigator = props => {
             handleRemoveFavourites={handleRemoveFavourites}
             watchListState={watchListState}
             favouritesState={favouritesState}
+            onSetTheme={onSetTheme}
           />
         )}
       />

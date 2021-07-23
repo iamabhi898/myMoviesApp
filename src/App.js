@@ -2,6 +2,7 @@ import React from 'react';
 import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import config from '../config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import TabsNavigator from './navigation/TabsNavigator';
 
@@ -55,6 +56,64 @@ const App = () => {
     setFavouritesState(state => state.filter(item => item !== movieId));
   };
 
+  // storing theme preference
+  const onSetTheme = async isDark => {
+    try {
+      setIsDarkMode(isDark);
+      const val = isDark.toString();
+      await AsyncStorage.setItem('@isDarkMode', val);
+    } catch (e) {
+      console.log('storing theme doesnt work', e);
+    }
+  };
+
+  // storing watchlist and favourites data locally
+  React.useEffect(async () => {
+    try {
+      const jsonValue = JSON.stringify({
+        watchListState: await watchListState,
+        favouritesState: await favouritesState,
+      });
+      await AsyncStorage.setItem('@storage_Key', jsonValue);
+    } catch (e) {
+      // saving error
+      console.log('storing tasks doesnt work', e);
+    }
+  }, [watchListState, favouritesState]);
+
+  // loading stored theme preference
+  const getStoredDarkThemeData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@isDarkMode');
+      if (value !== null) {
+        // value previously stored
+        const isTrueSet = value === 'true';
+        setIsDarkMode(isTrueSet);
+      }
+    } catch (e) {
+      // error reading value
+      console.log('loading stored theme doesnt work', e);
+    }
+  };
+
+  // loading stored watchlist and favourites data
+  React.useEffect(async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@storage_Key');
+      const tasksObj =
+        jsonValue != null
+          ? JSON.parse(jsonValue)
+          : console.log('watchlist and favourites are empty');
+      // console.log(tasksObj);
+      setWatchListState(tasksObj.watchListState);
+      setFavouritesState(tasksObj.favouritesState);
+      // console.log('loaded stored tasks successfully');
+    } catch (e) {
+      // error reading value
+      console.log('loading stored tasks data doesnt work');
+    }
+  }, []);
+
   // TMDb API
   const fetchMovies = async (setMoviesState, category) => {
     let url;
@@ -104,6 +163,8 @@ const App = () => {
     fetchMovies(setMoviesState, 'upcoming');
     fetchMovies(setMoviesState, 'popular');
     fetchMovies(setMoviesState, 'topRated');
+    // async storage
+    getStoredDarkThemeData();
   }, []);
 
   return (
@@ -123,6 +184,7 @@ const App = () => {
         handleRemoveFavourites={handleRemoveFavourites}
         watchListState={watchListState}
         favouritesState={favouritesState}
+        onSetTheme={onSetTheme}
       />
     </NavigationContainer>
   );

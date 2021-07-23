@@ -1,5 +1,6 @@
 package com.mymoviesapp;
 
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
