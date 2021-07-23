@@ -77,7 +77,7 @@ const App = () => {
       await AsyncStorage.setItem('@storage_Key', jsonValue);
     } catch (e) {
       // saving error
-      console.log('storing tasks doesnt work', e);
+      console.log('storing data doesnt work', e);
     }
   }, [watchListState, favouritesState]);
 
@@ -104,13 +104,12 @@ const App = () => {
         jsonValue != null
           ? JSON.parse(jsonValue)
           : console.log('watchlist and favourites are empty');
-      // console.log(tasksObj);
       setWatchListState(tasksObj.watchListState);
       setFavouritesState(tasksObj.favouritesState);
-      // console.log('loaded stored tasks successfully');
+      // console.log('loaded stored data successfully');
     } catch (e) {
       // error reading value
-      console.log('loading stored tasks data doesnt work');
+      console.log('loading stored data doesnt work');
     }
   }, []);
 
