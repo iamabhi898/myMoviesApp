@@ -108,6 +108,7 @@ const HomeStackNavigator = props => {
           headerRight: () => (
             <MovieHeaderIcons
               movieId={route.params.movieId}
+              movieTitle={route.params.title}
               handleAddWatchList={handleAddWatchList}
               handleAddFavourites={handleAddFavourites}
               handleRemoveWatchList={handleRemoveWatchList}

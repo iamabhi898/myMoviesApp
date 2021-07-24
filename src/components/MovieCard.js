@@ -23,7 +23,7 @@ const MovieCard = props => {
     <TouchableOpacity
       activeOpacity={0.9}
       onPress={() => {
-        navigation.push('Movie', {movieId});
+        navigation.push('Movie', {movieId, title});
       }}>
       <View
         style={{...styles.cardWrapper, backgroundColor: bkgStyle.secBkgColor}}>
