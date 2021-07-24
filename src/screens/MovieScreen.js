@@ -72,10 +72,10 @@ const MovieScreen = props => {
   React.useEffect(() => {
     if (movieState !== null) {
       setMoviePoster(
-        `http://image.tmdb.org/t/p/w200/${movieState.poster_path}`,
+        `https://image.tmdb.org/t/p/w200/${movieState.poster_path}`,
       );
       setMovieBackdrop(
-        `http://image.tmdb.org/t/p/w500/${movieState.backdrop_path}`,
+        `https://image.tmdb.org/t/p/w500/${movieState.backdrop_path}`,
       );
     }
   }, [movieState]);

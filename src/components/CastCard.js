@@ -6,7 +6,7 @@ const CastCard = props => {
   const [profileImage, setProfileImage] = React.useState(null);
 
   React.useEffect(() => {
-    setProfileImage(`http://image.tmdb.org/t/p/w200/${profilePic}`);
+    setProfileImage(`https://image.tmdb.org/t/p/w200/${profilePic}`);
   }, []);
 
   return (

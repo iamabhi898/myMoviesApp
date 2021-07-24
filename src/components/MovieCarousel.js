@@ -17,7 +17,7 @@ const MovieCarousel = props => {
   const {movies, bkgStyle, isDarkMode, navigation} = props;
   let topMovies = movies.slice(0, 5);
 
-  const getPosterPath = poster => `http://image.tmdb.org/t/p/w500/${poster}`;
+  const getPosterPath = poster => `https://image.tmdb.org/t/p/w500/${poster}`;
 
   const scrollX = new Animated.Value(0);
   let position = Animated.divide(scrollX, vw);

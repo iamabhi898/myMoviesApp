@@ -54,7 +54,7 @@ const CastScreen = props => {
   };
 
   React.useEffect(() => {
-    setProfileImage(`http://image.tmdb.org/t/p/w300/${profilePic}`);
+    setProfileImage(`https://image.tmdb.org/t/p/w300/${profilePic}`);
     fetchDetails(castId);
     fetchExternalId(castId);
   }, []);

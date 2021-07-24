@@ -6,7 +6,7 @@ const MovieCard = props => {
   const [moviePoster, setMoviePoster] = React.useState(null);
 
   React.useEffect(() => {
-    setMoviePoster(`http://image.tmdb.org/t/p/w300/${poster}`);
+    setMoviePoster(`https://image.tmdb.org/t/p/w300/${poster}`);
   }, []);
 
   const getRatingTxtColor = rating => {
