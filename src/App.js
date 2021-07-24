@@ -3,6 +3,7 @@ import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import config from '../config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SplashScreen from 'react-native-splash-screen';
 
 import TabsNavigator from './navigation/TabsNavigator';
 
@@ -158,6 +159,7 @@ const App = () => {
   };
 
   React.useEffect(() => {
+    SplashScreen.hide();
     fetchMovies(setMoviesState, 'trending');
     fetchMovies(setMoviesState, 'upcoming');
     fetchMovies(setMoviesState, 'popular');
