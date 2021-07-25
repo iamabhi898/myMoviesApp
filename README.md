@@ -15,22 +15,32 @@ This is a Movies app for searching and discovering movies, this app allows you t
 - Get trending movies list for the day
 - Get popular, upcoming and top rated movies
 - Search movies by title
-- Get movie details like rating
+- Discover movies by genres
+- Share movies via app
+- Get cast's details
+- Get movie's details
+- Watch trailer of movies
+- Make your watchlist and favourites
 - Enable Dark theme
 
-### Technologies Used
+### Technologies Used and Dependencies
 
 - React Native CLI
 - react-native-vector-icons - Ionicons Icons
 - react-native-dotenv - API_KEY
 - react-native-popup-menu - Popup Menu
 - react-native-linear-gradient
+- react-native-splash-screen
+- react-native-async-storage/async-storage
+- react-native-clipboard/clipboard
 - Git Version Control
 - [TMDb](https://www.themoviedb.org/) API (The Movie Datebase)
 
 ---
 
 ## How To Use
+
+> You can download the apk from assets of release section of this repository
 
 `Read the documention of React Native for Installation and Environment Setup `
 [here](https://reactnative.dev/docs/environment-setup)

@@ -6,12 +6,14 @@ const AboutScreen = props => {
   const {bkgStyle} = props;
   return (
     <View style={{...styles.screen, backgroundColor: bkgStyle.bkgColor}}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={{paddingBottom: 150}}
+        showsVerticalScrollIndicator={false}>
         <View style={styles.description}>
           <Text style={{...styles.descriptionTxt, color: bkgStyle.txtColor}}>
             This app is developed with the intend of learning, "My Movies" is a
             personal project for portfolio of the developer. {'\n\n'}This app
-            uses TMDb API for the sole purpose of leaning app development and
+            uses TMDb API for the sole purpose of learning app development and
             developer do not intend to use this app for any kind of revenue.{' '}
             {'\n\n'}
             Permission is hereby granted, free of charge, to any person
