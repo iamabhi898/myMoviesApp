@@ -51,6 +51,12 @@ Download the project then run following commands.
 npm install
 ```
 
+> You will need API key to fetch the movies data from TMDb, so get your API key from there then make a .env file in the project directory and write as following in .env file:
+
+```
+API_KEY=your_api_key
+```
+
 Android :
 
 ```
