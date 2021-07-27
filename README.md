@@ -75,6 +75,6 @@ npx react-native run-ios
 
 ## Author Info
 
-- LinkedIn - [Abhishek Tripathi](https://www.linkedin.com/in/abhishek-tripathi-244a8b190/)
+- LinkedIn - [Abhishek Tripathi](https://www.linkedin.com/in/iamabhi898/)
 
 [Back To The Top](#my-movies)
