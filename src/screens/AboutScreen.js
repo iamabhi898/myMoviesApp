@@ -34,7 +34,7 @@ const AboutScreen = props => {
               style={{marginRight: 20}}
               onPress={async () => {
                 await Linking.openURL(
-                  'https://www.linkedin.com/in/abhishek-tripathi-244a8b190/',
+                  'https://www.linkedin.com/in/iamabhi898/',
                 );
               }}
             />
