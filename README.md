@@ -4,6 +4,8 @@
 
 > A Movies App that allows you to search and discover movies to save them to your watchlist or your favourites.
 
+> Video Demo Link: https://www.linkedin.com/posts/iamabhi898_reactnative-git-github-activity-6824935077974200320-hatf
+
 ---
 
 ## Description
